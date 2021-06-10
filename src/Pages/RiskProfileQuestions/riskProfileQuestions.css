@@ -1,0 +1,47 @@
+.unlisted-assests-logo-header{
+    width: 100%;
+}
+
+.horizontal-line {
+    margin: 0;
+}
+
+.back-button {
+    height: 27px;
+    width: 70px;
+    margin-left: 32px;
+    margin-top: 20px;
+}
+
+.main-content-container {
+    display: flex;
+}
+
+.title-card {
+    border-radius: 10px;
+    margin-top: 31px;
+    display: flex;
+    border-style: solid;
+    border-color: black;
+    margin-right: 150px;
+    border: 1px solid #CFCBCF;
+}
+
+.risk-profile-image-container {
+    margin-right: 70px;
+    margin-top: 20px;
+}
+
+.risk-profile-image-container img {
+    width: 220px;
+    height: 150px;
+}
+
+.description {
+    width: 630px;
+}
+
+.text-content {
+    margin-right: 80px;
+    margin-left: 20px
+}

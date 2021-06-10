@@ -1,0 +1,47 @@
+
+.c_name h4 {
+  color: #2E384D;
+}
+.desktop-none{
+  display: none;
+}
+.text-grey {
+  color: #8d8d8d;
+}
+@media only screen and (max-width: 768px) {
+  .mobi-none{
+    display: none !important;
+  }
+  .mobi-block{
+    display: block;
+  }
+  .c_logo img {
+    padding: 5px !important;
+    margin: 8px 0px !important;
+}
+.c_name h4 {
+  font-size: 15px;
+  margin-top: 10px;
+}
+  .CorporateInformation-text.border-left {
+    border: none !important;
+}
+p.text-left.w-50.mobi-right-text {
+  text-align: right !important;
+}
+hr{
+  overflow-x: hidden;
+}
+.code{
+  margin-top: 15px !important;
+}
+.company-details-tabs .MuiTab-root {
+  min-width: 100px !important;
+}
+.c_name.mobi-block.desktop-none p {
+  padding: 7px 0px !important;
+}
+.c_inactive.m-3 {
+  margin: 8px 0!important;
+}
+}

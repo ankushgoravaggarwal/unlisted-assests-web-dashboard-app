@@ -1,0 +1,93 @@
+.Virtual_account_text{
+    font-family: Montserrat;
+    font-style: normal;
+    color: #2E384D;
+}
+/* .Virtual_account_Label{
+    font-family: Montserrat;
+font-style: normal;
+font-weight: 500;
+font-size: 14px;
+color: #2E384D;
+} */
+.Virtual_account_container{
+    display: flex;
+    margin: 10px;
+    justify-content: space-between;
+    border: 1px solid #CFCBCF;
+    border-radius: 10px;
+    padding: 20px;
+    width: 100%;
+}
+.Virtual_account_who_are_you{
+    font-weight: 600;
+}
+.Virtual_account_Choose_radio_group{
+    /* margin-top: 12px; */
+    font-weight: 500;
+    font-size: 14px;
+    color: #2E384D;
+}
+.Virtual_account_Choose_radio_border{
+    width: 596px;
+    height: 40px;
+    border: 1px solid #CFCBCF;
+    /* box-sizing: border-box; */
+    border-radius: 4px;
+
+}
+
+.Virtual_account_bank_image_area{
+    width: 187.23px;
+    height: 134px;
+    background: url(https://www.google.co.in/);
+    border-radius: 10px;
+    padding-bottom: 40px;
+}
+.Virtual_account_bank_image_container{
+    /* width: 610px; */
+    height: 458px;
+    border: 1px solid #CFCBCF;
+    box-sizing: border-box;
+    filter: drop-shadow(0px 5px 50px #E5E9F3);
+    border-radius: 22px;
+    padding: 80px;
+
+}
+.Virtual_account_save_button{
+    display: flex;
+    width: 650px;
+    margin-top: 30px;
+    /* padding-left: 200px; */
+    border-top: 1px solid #CFCBCF;
+    padding-top: 20px;
+    flex-direction: column;
+}
+.Virtual_account_Select_container{
+    width: 362px;
+    height: 40px;
+    border: 1px solid #CFCBCF;
+
+border-radius: 4px;
+margin-top: 12px;
+margin-bottom:7px ;
+margin-left:-3px;
+}
+.Virtual_account_previous_button{
+    height: 60vh;
+}
+.virtualaccount_statement_download{
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 20px;
+    color: #721B65;
+    width: 302px;
+    height: 48px;
+    border: 2px solid #721B65;
+    box-sizing: border-box;
+    border-radius: 4px;
+    background: white;
+    margin: 20px;
+}

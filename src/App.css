@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:regular,bold,italic&subset=latin,latin-ext');
+
+.App {
+  text-align: center;
+}
+
+body, html, p, label { 
+  font-family: 'Montserrat', normal;
+}
+body{ 
+  background: #E5E5E5;
+}
+input {
+  border-style:solid;
+}
+
+input.submit-button {
+  height: 40px !important;
+}
+.breathumbs-top ul{
+list-style: none;
+display: flex;
+align-items: center;
+margin: 0;
+padding: 0;
+}
+.breathumbs-top ul li{
+  padding: 0px 8px;
+  color: #721c65;
+  font-weight: 600;
+  display: flex;
+   align-items: center;
+  }

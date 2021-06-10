@@ -1,0 +1,67 @@
+.seller-card {
+    /* background: rgba(114, 27, 101, 0.03); */
+    width: 350px;
+    /* border: 1px solid rgba(114, 27, 101, 0.6);
+    border-radius: 20px 20px 0px 20px; */
+    padding: 10px;
+    float: right;
+    background: rgba(114, 27, 101, 0.03);
+border: 1px solid rgba(114, 27, 101, 0.6);
+box-sizing: border-box;
+border-radius: 20px 20px 0px 20px;
+    
+}
+
+.seller-card .row {
+    display: flex;
+    justify-content: space-between;
+}
+.seller-card .seller_card_Company_logo{
+    position: absolute;
+    padding-top:1% ;
+}
+.seller_card_first_row{
+    display: flex;
+    padding-left: 10%;
+    justify-content: space-between;
+    
+}
+.Sellercard_horizontal_line{
+    border: 1px solid #CFCBCF;
+    width: 100%;
+}
+.user-comment{
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 10px;
+    line-height: 12px;
+    color: #2E384D;}
+
+.user-message{
+font-family: Montserrat;
+font-style: normal;
+font-weight: 500;
+font-size: 14px;
+line-height: 17px;
+/* identical to box height */
+text-align: right;
+color: #2E384D;
+
+    }
+    .seller-proposed_amt{
+        font-family: Montserrat;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    
+    /* identical to box height */
+    
+    color: #721B65;
+    }
+    .seller-proposed-amt-in-numbers{
+        font-weight: bold;
+    font-size: 16px;
+    color: #721B65;
+    }

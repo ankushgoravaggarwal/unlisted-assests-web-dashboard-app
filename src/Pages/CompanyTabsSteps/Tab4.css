@@ -1,0 +1,13 @@
+
+.summary-tab-section h6{
+    font-family: 'Montserrat';
+    font-weight: 600 !important;
+    font-size: 15px !important;
+}
+.summary-list ul {
+    color: #7E7E7E;
+    font-weight: 400;
+    font-family: 'Montserrat';
+    font-size: 14px;
+    line-height: 2;
+}

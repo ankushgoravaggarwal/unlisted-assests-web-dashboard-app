@@ -1,0 +1,32 @@
+.listing {
+    display: flex;
+    justify-content: space-evenly;
+    border-bottom: solid 1px;
+}
+
+.col-0 {
+    display: flex;
+    align-items: center;
+}
+
+.col-0 p {
+    margin: 5px 0 5px 0;
+}
+
+.col-0 p:nth-child(2) {
+    font-size: 14px;
+}
+
+.col-0 p:nth-child(3) {
+    font-size: 14px;
+}
+
+
+.bold {
+    font-weight: bold;
+}
+
+.Negotiation_logo{
+    margin-right: 15px;
+    padding-top: 3.5%;
+}

@@ -1,0 +1,20 @@
+.title {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.description {
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.error-toast {
+    display: flex;
+    align-items: center;
+    max-width: 90px;
+}
+
+.error-image {
+    width: 25px;
+    height: 25px;
+}

@@ -1,0 +1,113 @@
+.dashboard-header {
+    display: flex;
+    background-color: #721B65;
+    justify-content: space-between;
+    padding: 5px 0 5px 0;
+}
+.desktop-none{
+    display: none !important;
+}
+.logo-img{
+    width: 100%;
+    padding: 10px 10px;
+}
+.left-side {
+    display: flex;
+    align-items: center;
+}
+
+.left-side img {
+    margin-right: 33px;
+    height: 26px;
+}
+
+.right-side {
+    display: flex;
+    align-items: center;
+}
+ul.top-menus-links {
+    display: flex;
+    width: 100%;
+    padding: 0;
+    margin: 0 !important;
+    list-style: none;
+    align-items: center;
+    justify-content: center;
+}
+.nav-item {
+    padding: 10px 10px;
+    display: flex !important;
+    align-items: center;
+}
+.nav-item a:hover{
+    text-decoration: none !important;
+    padding-bottom: 3px;
+    transition: 0.1s;
+}
+.nav-item-group {
+    display: flex;
+    align-items: center;
+}
+.nav-item span {
+    text-align: center;
+    color: white;
+    font-size: 12px;
+    white-space: nowrap;
+    font-weight: 600;
+    font-family: 'Montserrat', sans-serif;
+    background: transparent;
+}
+.nav-item span {
+    display: flex;
+    align-items: center;
+}
+.selected {
+    background-color: white;
+    border-radius: 7px;
+}
+
+.selected span {
+    color: #721B65;
+}
+
+a {
+    text-decoration: none;
+}
+.mobile-toggle {
+    display: none;
+}
+@media only screen and (max-width: 768px) {
+    .mobi-none{
+        display: none !important;
+    }
+    .desktop-none{
+        display: block !important;
+    }
+    .col-md-8.col-12.d-flex.align-items-center.justify-content-center.mobi-none{
+        display: none !important;
+    }
+    .logo-section{
+       text-align: center;
+    }
+    .mobile-toggle {
+        display: block;
+        position: absolute;
+        top: 0;
+    }
+    .mobile-toggle .MuiIconButton-root {
+        color: rgb(255 255 255) !important;
+        font-size: 2rem !important;
+    }
+    .nav-item span {
+        color: #721c65;
+    }
+    ul.top-menus-links {
+        display: none;
+    }
+
+  }
+  @media only screen and (max-width: 1024px) {
+    .nav-item {
+      padding: 10px 5px !important;
+    }
+    }

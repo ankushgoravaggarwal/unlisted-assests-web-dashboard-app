@@ -1,0 +1,89 @@
+body{
+    font-family: 'Montserrat' !important;
+}
+.MuiBox-root.MuiBox-root-59 {
+    padding: 0px !important;
+}
+.MuiBox-root-10 {
+    padding: 0px !important;
+}
+.PrivateSwitchBase-root-14 {
+    padding: 0px 0px !important;
+}
+.MuiIconButton-root {
+    float: right;
+}
+.makeStyles-FormControl-81 {
+    padding: 4px 8px !important;
+}
+.makeStyles-FormControl-11 {
+    margin-left: 0px !important;
+    padding-left: 7px !important;
+    justify-content: space-between;
+    padding: 5px 7px !important;
+}
+.makeStyles-FormControl-21 {
+    margin-left: 0px !important;
+    padding-left: 10px !important;
+    padding: 5px 8px !important;
+}
+.step1-right-sec {
+    padding: 60px 40px;
+    border: 1px solid #cecbcf;
+    border-radius: 10px;
+}
+.text-small {
+    font-size: 13px;
+    font-family: 'Montserrat' !important;
+}
+.MuiRadio-root {
+    color: rgb(114 28 101) !important;
+}
+.Trade_ready_step_1_text{
+    font-family: 'Montserrat' !important;
+    font-style: normal;
+    color: #2E384D;
+}
+.Trade_ready_step_1_container{
+    display: flex;
+    margin: 10px;
+    justify-content: space-between;
+}
+.Trade_ready_step_1_who_are_you{
+    font-weight: 600;
+}
+.Trade_ready_step_1_Choose_radio_group{
+    /* margin-top: 12px; */
+    font-weight: 500;
+    font-size: 14px;
+    color: #2E384D;
+}
+.Trade_ready_step_1_Choose_radio_border{
+    border: 1px solid #CFCBCF;
+    border-radius: 4px;
+}
+
+.Trade_ready_step_1_bank_image_area{
+    width: 187.23px;
+    height: 134px;
+    background: url(https://www.google.co.in/);
+    border-radius: 10px;
+    padding-bottom: 40px;
+}
+.Trade_ready_step_1_bank_image_container{
+    width: 610px;
+    height: 458px;
+    border: 1px solid #CFCBCF;
+    box-sizing: border-box;
+    filter: drop-shadow(0px 5px 50px #E5E9F3);
+    border-radius: 22px;
+    padding: 80px;
+
+}
+.Trade_ready_step_1_save_button{
+    width: 150px;
+    margin-top: 30px;
+    padding-left: 470px;
+    border-top: 1px solid #CFCBCF;
+    padding-top: 20px;
+}

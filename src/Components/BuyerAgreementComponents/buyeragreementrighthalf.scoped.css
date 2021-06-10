@@ -1,0 +1,14 @@
+.buyeragreement_completetransactionsteps{
+    display: flex;
+    border-top: 1px solid #CFCBCF;
+    border-right: 1px solid #CFCBCF;
+    border-left: 1px solid #CFCBCF;
+    font-size: 16px;  
+     
+}
+.buyeragreement_radio{
+    width:40px;
+}
+.buyeragreement_radioContainer{
+    margin: 10px;
+}

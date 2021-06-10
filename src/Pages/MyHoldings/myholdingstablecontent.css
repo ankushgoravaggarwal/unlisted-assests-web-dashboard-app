@@ -1,0 +1,36 @@
+.company_cell{
+    display: flex;
+    align-items: center;
+    padding-left: 1%;
+
+}
+.company_details{
+    padding-left: 2%;
+    margin-left: 10%;
+}
+
+.Table_title{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+.company-logo-img img {
+    width: 50px;
+    height: 50px !important;
+    border-radius: 50%;
+    border: 1px solid #e0e0e0 !important;
+    padding: 5px;
+}
+button#add-holdings-button {
+    padding: 0px 30px;
+    height: 30px;
+    background: transparent;
+}
+.makeStyles-container-5 {
+    border: 0px solid #E5E5E5 !important;
+    border-radius: 10px !important;
+}
+.makeStyles-container-14 {
+    border: 0px solid #E5E5E5 !important;
+    border-radius: 10px !important;
+}

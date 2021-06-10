@@ -1,0 +1,25 @@
+.notification_container{
+    display: flex;
+    justify-content: center;
+}
+.notification_container1{
+    border: 1px solid #CFCBCF;
+    border-radius: 10px;
+    margin:20px ;
+    padding: 20px;
+    height: 100%;
+}
+.notification_row{
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #CFCBCF;
+    
+}
+.notification_marginLeft{
+    margin-left:20px ;
+}
+.notification_two_colums{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #CFCBCF;
+}
