@@ -1,8 +1,15 @@
-.negotiations {
-
-    background: #FAFAFF;
+.my-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid #CFCBCF;
+    border-radius: 10px;
+    padding: 15px;
 }
-
 .negotiations .content-card {
     min-height: 80vh;
     background: white;
@@ -15,16 +22,10 @@
     display: flex;
 }
 
-.ongoing-negotiations {
-    flex: .2;
-    /* border: solid 1px blue; */
-    margin: 20px;
-}
-
-.active-negotiation {
+/* .active-negotiation {
     flex: .8;
     border: solid 1px red;
-}
+} */
 
 
 
@@ -43,9 +44,11 @@
     display: flex;
     justify-content: flex-end;
     width: 100%;
-    
+    padding: 0px 100px;
 }
-
+.buyercard {
+    padding: 0px 100px;
+}
 .offerAccepted{
     display: flex;
     justify-content: center;
@@ -55,3 +58,84 @@
     
     height: 222px;
 }
+
+.has-search .form-control {
+    padding-left: 2.375rem;
+}
+
+.has-search .form-control-feedback {
+    position: absolute;
+    z-index: 2;
+    display: block;
+    width: 20px;
+    height: 20px;
+    line-height: 2.375rem;
+    text-align: center;
+    pointer-events: none;
+    color: #aaa;
+    margin-left: 8px;
+}
+.form-group.has-search {
+    display: flex;
+    align-items: center;
+}
+.Negotiation-logo-image {
+    height: 50px;
+    width: 50px;
+    border: 1px solid #dee2e6;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    margin: 8px 0px;
+}
+.Negotiation-logo-image img {
+    border-radius: 50%;
+}
+.Negotiation-list-info h6{
+    font-size: 14px;
+    font-family: 'Montserrat';
+}
+.Negotiation-list-info p {
+    font-size: 14px;
+    font-family: 'Montserrat';
+}
+.reject-tost{
+    display:flex;
+    background: #2E384D;
+    flex-direction:column;
+    padding:10px 15px;
+    border-radius: 10px;
+    color: #FFFFFF;
+    width: 340px;
+}
+.accept-tost{
+    display:flex;
+    background: #2E384D;
+    flex-direction:column;
+    padding:10px 15px;
+    border-radius: 10px;
+    color: #FFFFFF;
+    width: 340px;
+}
+.reject-tost p {
+    font-size: 14px;
+    font-family: 'Montserrat';
+}
+.accept-tost-msg p {
+    font-size: 14px;
+    margin-left: 45px;
+}
+.Negotiations-right-section {
+    border-left: 1px solid #dee2e6;
+    padding-left: 10px;
+}
+span.MuiTabs-indicator {
+    background: #721c65 !important;
+}
+@media only screen and (max-width: 678px) {
+    .mobi-none{
+        display: none;
+    }
+  }

@@ -1,7 +1,7 @@
 .listing {
     display: flex;
     justify-content: space-evenly;
-    border-bottom: solid 1px;
+    align-items: center;
 }
 
 .col-0 {
@@ -25,8 +25,129 @@
 .bold {
     font-weight: bold;
 }
-
-.Negotiation_logo{
-    margin-right: 15px;
-    padding-top: 3.5%;
+.Negotiation_logo {
+    border: 1px solid #dee2e6;
+    border-radius: 50%;
+    height: 70px;
+    width: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
+.Negotiation_logo img {
+    border-radius: 50%;
+    width: 65px;
+    height: 65px;
+}
+.listing p {
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 0;
+}
+.bold-text {
+    font-weight: 600;
+    color: #333b3f;
+    font-size: 12px;
+}
+.Negotiation-right-details ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+}
+.Negotiation-right-details li {
+    color: #3b4043;
+    font-size: 14px;
+    padding: 5px 12px;
+}
+.dots-link{
+    cursor: pointer;
+    display: block;
+}
+.dots-link.desktop-none {
+    display: none;
+}
+@media only screen and (max-width: 678px) {
+    .dots-link.desktop-none {
+        display: block !important;
+    }
+    .mobi-none{
+        display: none;
+    }
+    .Negotiation-right-details ul {
+        display: inline-grid !important;
+    }
+    .Negotiations-right-section {
+        border-left: 0px solid #dee2e6;
+        padding-left: 0px;
+    }
+    .Negotiation_logo img {
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+    }
+    .Negotiation_logo {
+        margin: 15px 0px;
+        height: 40px;
+        width: 40px;
+    }
+    .buyercard {
+        padding: 0px 0px !important;
+    }
+    .buyer-card {
+        width: 100% !important;
+    }
+    .lastseen {
+        margin: 10px 0px;
+        font-size: 12px;
+    }
+    .lastseen:before {
+        width: 25%;
+    }
+    .lastseen:after {
+        width: 25%;
+    }
+    .buyer-card-desc p {
+        font-size: 13px;
+    }
+    p.buyer-proposed-amt-in-numbers {
+        font-size: 15px;
+    }
+    .negotiation_buttons_container button {
+        width: 100% !important;
+        margin: 10px 5px !important;
+        padding: 0;
+        font-size: 10px !important;
+    }
+    .dots-link {
+        text-align: right;
+    }
+    .dots-link img{
+        width: 30px;
+    }
+    .dots-link {
+        position: absolute;
+        right: 0;
+        top: 20px;
+    }
+    .buyer-form-sec {
+        width: 100%;
+    }
+    .buyerform-section .form-group {
+        width: 100%;
+        margin: 5px 2px;
+    }
+    .buyerform-section .form-group input{
+        width: 100%;
+    }
+    p.m-0.ml-2.text-small b {
+        font-size: 12px !important;
+    }
+    .buyerform-total-section label {
+        font-size: 13px;
+    }
+    .flex-column-reverse-mobile {
+        flex-direction: column-reverse!important;
+    }
+  }

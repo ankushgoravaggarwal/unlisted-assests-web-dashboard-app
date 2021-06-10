@@ -1,5 +1,8 @@
 import HDFC from "../../Pages/Negotiations/hdfc.svg";
-import "./selectedAssest.css"
+import "./selectedAssest.css";
+import more from "./more.svg";
+import dots from "./dots.svg";
+
 import {
     BrowserRouter as Router,
     Switch,
@@ -9,86 +12,65 @@ import {
 
 let SelectedAssest = (props) => {
     let location = useLocation();
-    let selectedTrade = location.state.selectedTrade;
+
+    let selectedTradeOngoingTxn = location.state.selectedongoingtxn;
+    let selectedTrade1 = location.state.selectedTrade;
     return (
-        <div className="listing">
-
-            <div className="col-0">
-
-                <div className="Negotiation_logo">
-                    <img src={HDFC} />
+        <div className="listing-details">
+            <div className="row flex-column-reverse-mobile">
+                <div className="col-md-3 col-12  order-3 order-md-1">
+                    <div className="position-relative d-flex align-items-center w-100">
+                        <div className="Negotiation_logo">
+                            <img src={selectedTradeOngoingTxn.companyLogo} width={50}/>
+                        </div>
+                        <div className="pl-3">
+                            <h6 className="m-0"><b>{selectedTradeOngoingTxn.companyName}</b></h6>
+                            <p className="text-small m-0">     {selectedTradeOngoingTxn.commodityName}<br />
+                                    LIST{selectedTradeOngoingTxn.tradeId}</p>  
+                        </div>
+                        <div className="dots-link desktop-none">
+                            <img src={dots}/>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <p className="bold">
-                        HDFC Bank
-                </p>
-                    <p>
-                        Banking
-                </p>
-                    <p>
-                        INE0408056
-                </p>
+                <div className="col-md-8 col-12 order-1">
+                    <div className="Negotiation-right-details">
+                        <ul>
+                            <li>
+                                Price/Share <br />
+                                <span className="bold-text">{selectedTrade1.price}</span>
+                            </li>
+                            <li>
+                                Qty <br />
+                                <span className="bold-text">{selectedTrade1.qty}</span>
+                            </li>
+                            <li>
+                                Amount <br />
+                                <span className="bold-text">{selectedTradeOngoingTxn.priceUnderNegotiation}</span>
+                            </li>
+                            <li>
+                                Offer Price Range <br />
+                                <span className="bold-text">{selectedTrade1.minBidPriceAccepted} - {selectedTrade1.price}</span>
+                            </li>
+                            <li>
+                                Date & Time  (last updated) <br />
+                                <span>{selectedTradeOngoingTxn.updateDate}</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div className="col-md-1 col-4 order-2 mobi-none order-md-3">
+                    <div className="dots-link">
+                        <img src={dots}/>
+                    </div>
                 </div>
             </div>
 
-            <div>
-                <p>
-                    Share Type
-            </p>
-                <p>
-                    {selectedTrade.commodityName}
-            </p>
+            <div className="text-center border-bottom cursor-pointer ">
+                <img src={more}/>
             </div>
-
-            <div>
-                <p>
-                    Price/Share
-            </p>
-                <p>
-                {selectedTrade.price}
-            </p>
-            </div>
-
-
-            <div>
-                <p>
-                    Qty
-            </p>
-                <p>
-                {selectedTrade.qty}
-            </p>
-            </div>
-
-
-            <div>
-                <p>
-                    Amount
-            </p>
-                <p>
-                    1200
-            </p>
-            </div>
-
-            <div>
-                <p>
-                    Offer Price Range
-            </p>
-                <p>
-                    80 - 110
-            </p>
-            </div>
-
-            <div>
-                <p>
-                    Date & Time
-            </p>
-                <p>
-                {selectedTrade.updateDate}
-            </p>
-            </div>
-
-
         </div>
+        
     )
 }
 

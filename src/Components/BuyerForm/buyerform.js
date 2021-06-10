@@ -21,8 +21,42 @@ export default function BuyerForm(props){
     const [communicationStatus,setCommunicationstatus] = React.useState('newoffer')
     const [tradeOnGoingTranaction,setTradeOnGoingTranaction] = React.useState({});
     const [nonTradeOwnerAccountId,setNonTradeOwnerAccountId] = React.useState('');
+    const [quantityError,setQuantityError] = React.useState('')
+    const [showQuantityError,setShowQuantityError] = React.useState('')
+    const [priceError,setPriceError] = React.useState('')
+    const [showPriceError,setShowPriceError] = React.useState('')
+    const [commentError,setCommentError] = React.useState('')
+    const [showCommentError,setShowCommentError] = React.useState('')
+    
+    let InlineValidationQuantity = () => {
+        return (
+            <div className="inline-validation-box">
+                <p>
+                    {quantityError}
+                </p>
+            </div>
+        )
+    }
+    
+    let InlineValidationBoxPrice = () => {
+        return (
+            <div className="inline-validation-box">
+                <p>
+                    {priceError}
+                </p>
+             </div>
+        )
+    }
 
-
+    let InlineValidationBoxComment = () => {
+        return (
+            <div className="inline-validation-box">
+                <p>
+                    {commentError}
+                </p>
+             </div>
+        )
+    }
     props.acceptorreject();
 
     useEffect(()=>{
@@ -51,6 +85,32 @@ export default function BuyerForm(props){
         }
     }
 
+    const validate = async (field, errorMessage) => {
+        console.log("hihhihihihihihihihihihihihihihihihiiiiiii"+field, errorMessage)
+          switch (field) {
+              case 'quantity':
+                  console.log("hooooooooooooooooo1"+errorMessage)
+                  await setQuantityError(errorMessage);
+                  await setQuantity(field);
+                  break;
+    
+                case 'price':
+                    console.log("hooooooooooooooooo1"+errorMessage)
+                  await setShowPriceError(errorMessage);
+                  await setPrice(field);
+                  break;
+                
+                  case 'comment':
+                    console.log("hooooooooooooooooo1"+errorMessage)
+                  await setShowCommentError(errorMessage);
+                  await setComment(field);
+                  break;     
+    
+              default:
+                  console.log("hooooooooooooooooonijhibibibibib")
+    
+          }
+      }
     async function buyerformsend() {
 
         const response = await apiCall("tradecommunication/",'POST',reqBody)
@@ -69,64 +129,71 @@ export default function BuyerForm(props){
                 props.acceptorreject(reqBody);
                 
         }
+        if (response.status === 409) {
+
+            return
+          } else if (response.status === 400) {
+              let responseJSON = await response.json()
+              let i = 0;
+              const arrayerrormessages = responseJSON.details1;
+              console.log(arrayerrormessages)
+              const listItems = arrayerrormessages.map((errorResponse) =>
+      
+                  validate(errorResponse.field,errorResponse.errorMessage)
+              );
+          }
     }
 
     
     return(
-        <div style={{border: "1px solid #CFCBCF",width:"402px",height:"400px",
-        display:"flex",flexDirection:"column",justifyContent:"center",color: "#2E384D"}}>
-            <div style={{margin:"10px"}}>
-                <div style={{display:"flex",justifyContent:"space-between",marginBottom:"10px"}}>
-                <div style={{display:"flex",flexDirection:"column"}}>
-                <label>Quantity*</label>
-                <input type="text" style={{border: "1px solid #CFCBCF",borderRadius: "4px"}}
-                value={quantity}
-                onChange={(e)=>setQuantity(e.target.value)}
-                />
-                </div>
-                <div style={{display:"flex",flexDirection:"column"}} >
-                <label>Price(₹)*</label>
-                <input type="text" style={{border: "1px solid #CFCBCF",borderRadius: "4px"}}
-                value={price}
-                onChange={(e)=>setPrice(e.target.value)}
-                />
-                </div>
+        <div className="border p-3 rounded buyer-form-sec">
+            <div className="buyerform-section">
+                <div className="d-flex">
+                    <div className="form-group">
+                        <label className="text-small">Quantity*</label> <br />
+                        <input type="text" className="border rounded mr-2"
+                        value={quantity}
+                        onChange={(e)=>setQuantity(e.target.value)}
+                        />
+                    </div>
+                    {showQuantityError ? <InlineValidationQuantity/> : null}
+                    <div className="form-group">
+                        <label className="text-small">Price(₹)*</label><br />
+                        <input type="text" className="border rounded"
+                        value={price}
+                        onChange={(e)=>setPrice(e.target.value)}
+                        />
+                    </div>
+                 {showPriceError ? <InlineValidationBoxPrice/> : null}
                 </div >
-                <div style={{display:"flex",flexDirection:"column"}}>
-                <label>Comment</label>
-                <input type="text" style={{border: "1px solid #CFCBCF",borderRadius: "4px"}}
-                value={comment}
-                onChange={(e)=>setComment(e.target.value)}
-                />
+                <div className="form-group">
+                    <label className="text-small">Comment</label> <br/>
+                    <input type="text" className="border rounded w-100"
+                    value={comment}
+                    onChange={(e)=>setComment(e.target.value)}
+                    />
                 </div>
-                <div style={{display:"flex"}}>
-                    <div style={{paddingTop:"10px",marginRight:"10px"}}>
-                <input type="checkBox" />
-                </div>
-                <div>  
-                    <p>I accept negotiation's <b style={{color:"#721B65"}}>Terms & Conditions</b></p>
-                </div>
-
+                {showCommentError ? <InlineValidationBoxComment/> : null}
+                <div className="d-flex align-items-center">
+                    <input type="checkBox" />
+                    <p className="m-0 ml-2 text-small">I accept negotiation's <b style={{color:"#721B65"}}>Terms & Conditions</b></p>
                 </div>
             </div>
-            <div style={{display:"flex",flexDirection:"column",borderTop:"1px solid #CFCBCF",marginLeft:"10px",marginRight:"10px"}}>
-                <div style={{display:"flex",justifyContent:"space-between",margin:"10px"}}>
-                <label>Qty: {quantity && price !== 0 ? <span>{quantity} x {price}</span> : null}</label>  <span>₹ {quantity * price}</span>
-                
+            <div className="buyerform-total-section border-top mt-2">
+                <div className="d-flex justify-content-between p-2">
+                    <label className="m-0">Qty: {quantity && price !== 0 ? <span>{quantity} x {price}</span> : null}</label>  <span>₹ {quantity * price}</span>
                 </div>
-                <div style={{display:"flex",justifyContent:"space-between",margin:"10px",marginBottom:"0px"}}>
-                <label>Transaction Fees</label><span>₹ 112</span>
-                
+                <div className="d-flex justify-content-between p-2">
+                    <label className="m-0">Transaction Fees</label><span>₹ 112</span>
                 </div>
-                <div style={{marginLeft:"10px",marginBottom:"10px"}}>
+                <div className="m-1">
                     <label style={{fontSize:"10px"}}>* Including GST</label>
                 </div>
-                <div style={{display:"flex",justifyContent:"space-between",color:"#721B65",marginLeft:"10px",marginRight:"10px"}}>
-                <label>Proposed Amount</label><span><b>₹ 112</b></span>
-                
+                <div className="d-flex justify-content-between p-2">
+                    <label className="m-0" style={{color:"#721B65"}}>Proposed Amount</label><span style={{color:"#721B65"}}><b>₹ 112</b></span>
                 </div>
             </div>
-            <div>
+            <div className="d-flex justify-content-center">
                 <Buttons.SecondaryButton value="Cancel" onClick={()=>{props.setNewoffer(false)}}/>
                 <Buttons.PrimaryButton value="Send" onClick={buyerformsend}/>
             </div>

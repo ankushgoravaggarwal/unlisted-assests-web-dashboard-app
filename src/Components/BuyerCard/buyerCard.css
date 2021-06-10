@@ -1,25 +1,34 @@
 .buyer-card {
     background: rgba(46, 56, 77, 0.03);
+    /* width: 350px; */
+    width: 50%;
+    border: 1px solid rgba(46, 56, 77, 0.6);
+    border-radius: 0px 20px 20px 20px;
+    padding: 15px 20px;
+    font-family: 'Montserrat';
+}
+.buyer_card_accepted{
+    background: green;
     width: 350px;
     border: 1px solid rgba(46, 56, 77, 0.6);
     border-radius: 0px 20px 20px 20px;
     padding: 8px;
-    
 }
-
-.buyer-card .row {
-    display: flex;
-    justify-content: space-between;
+.price {
+    color: #2E384D !important;
+    font-weight: 500;
+    font-size: 13px;
+}
+.buyer-card-desc p {
+    margin: 5px 0px;
 }
 .buyer-card .buyer_card_Company_logo{
     position: absolute;
-    padding-top:1% ;
 }
 .buyer_card_first_row{
     display: flex;
     padding-left: 10%;
     justify-content: space-between;
-    
 }
 .Buyercard_horizontal_line{
     border: 1px solid #CFCBCF;
@@ -60,3 +69,43 @@ color: #721B65;
 font-size: 16px;
 color: #721B65;
 }
+.time {
+    font-size: 12px;
+    margin-left: 6px;
+}
+.lastseen {
+    width: 100%;
+    margin: 25px 0px;
+    padding: 0;
+    text-align: center;
+    font-family: 'Montserrat';
+    text-transform: capitalize;
+    
+}
+.lastseen:after {
+    display: inline-block;
+    margin: 0 0 5px 20px;
+    height: 1px;
+    content: " ";
+    text-shadow: none;
+    background-color: #CFCBCF;
+    width: 40%;
+}
+.lastseen:before {
+    display: inline-block;
+    margin: 0 20px 5px 0;
+    height: 1px;
+    content: " ";
+    text-shadow: none;
+    background-color: #CFCBCF;
+    width: 40%;
+}
+.buyercard h3 {
+    font-size: 14px;
+    font-weight: 600;
+}
+@media only screen and (max-width: 678px) {
+    .buyer_card_first_row p {
+        margin-left: 8px !important;
+    }
+  }

@@ -11,7 +11,6 @@ export default function NegotiationBuy (){
         <div style={{display:"flex",border:"1px solid black"}}>
             <div style={{width:"50%"}} >
                 <h1>Filter</h1>
-
             </div>
             <div style={{display:"flex",flexDirection:"column",justifyContent:"center",width:"70%"}}>
             <div style={{display:"flex",border:"1px solid black",height:"30%"}}>

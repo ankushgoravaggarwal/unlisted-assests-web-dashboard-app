@@ -5,29 +5,28 @@ let BuyerCard = ({values}) => {
 
     console.log("props of buyer card", values)
     return (
-        <div className="buyer-card">
+        <div className={values.communicationStatus != "accepted" ? "buyer-card" : "buyer_card_accepted"}>
             <div className="buyer_card_Company_logo"> <img src={HDFC} /> </div>
-            <div className="buyer_card_first_row">
-                
-                <p>HDFC banks</p>
-                <p>₹ {values.offeredQuantity}</p>
+            <div className="buyer_card_first_row d-flex">
+                <p className="m-0">HDFC banks</p>
+                <h6 className="m-0 text-dark mr-2"><b>₹ {values.offeredQuantity}</b></h6>
             </div>
-            <div className="row">
-                <p>Price / Share</p>
-                <p>₹ {values.offeredPrice}</p>
+            <div className="buyer-card-desc mt-3 d-flex justify-content-between">
+                <p className="m-0">Price / Share</p>
+                <p className="price m-0">₹ {values.offeredPrice}</p>
             </div>
-            <div className="row">
-                <p>Transaction Fees <br/><span style={{fontSize:"10px"}}>*Including GST</span></p>
-                <p>₹ 14.7 </p>
+            <div className="buyer-card-desc  d-flex justify-content-between">
+                <p className="m-0">Transaction Fees <br/><span style={{fontSize:"10px"}}>*Including GST</span></p>
+                <p className="price m-0">₹ 14.7 </p>
             </div>
             <div className="Buyercard_horizontal_line"> </div>
-            <div className="row">
-                <p className="buyer-proposed_amt">Proposed Amount</p>
-                <p className="buyer-proposed-amt-in-numbers">₹ {values.offeredQuantity * values.offeredPrice}</p>
+            <div className="buyer-card-desc d-flex justify-content-between">
+                <p className="buyer-proposed_amt m-0">Proposed Amount</p>
+                <p className="buyer-proposed-amt-in-numbers m-0">₹ {values.offeredQuantity * values.offeredPrice}</p>
             </div>
-            <div className="row">
-                <p className="buyer-user-comment">*User Comment</p>
-                <p className="buyer-user-message">{values.message}</p>
+            <div className="buyer-card-desc d-flex justify-content-between">
+                <p className="buyer-user-comment m-0">*User Comment</p>
+                <p className="buyer-user-message m-0">{values.message}</p>
             </div>
             
         </div>

@@ -1,0 +1,46 @@
+
+@media only screen and (max-width: 678px) {
+  .Negotiation-listing-main {
+    display: flex;
+    overflow: scroll;
+  }
+  .Negotiation-list-info.p-2 {
+    width: 130px;
+    padding: 3px 10px !important;
+}
+.Negotiation-list-info h6 {
+  font-size: 12px;
+}
+.Negotiation-list-info p {
+  font-size: 12px;
+}
+.Negotiation-logo-image {
+  height: 25px;
+  width: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.Negotiation-logo-image img {
+  width: 25px;
+  height: 25px;
+}
+.reject-tost {
+  width: 300px;
+}
+.accept-tost {
+  width: 300px;
+}
+.reject-tost h4 {
+  font-size: 20px;
+}
+.accept-tost h4 {
+  font-size: 20px;
+}
+.reject-tost p {
+  font-size: 13px;
+}
+.user-title {
+  font-size: 10px;
+}
+}
