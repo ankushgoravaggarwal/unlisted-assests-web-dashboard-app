@@ -53,62 +53,68 @@ let Login = () => {
 
   // render() {
   return (
-    <div className="login_Page_Container">
-      <div className="login_Page_left-half">
-        <div className="login_Page_main-image-container">
-          <img src={loginPageMainImage} className="login_Page_main-image" />
-        </div>
-        <p className="login_Page_heading">Your data 100% safe with us</p>
-      </div>
-      <div className="login_Page_right-half">
-        <div className="login_Page_contents">
-          <div className="login_Page_logo-container">
-            <img src={logo} className="login_Page_logo" />
-          </div>
-          <h3>Welcome back,</h3>
-          <form>
-            <label>User ID *</label>
-            <input
-              type="text"
-              name="userID"
-              onChange={(e) => setUserID(e.target.value)}
-              value={userID}
-            />
-
-            <label>Password *</label>
-            <input
-              type="password"
-              name="password"
-              onChange={(e) => setPassword(e.target.value)}
-              value={password}
-            />
-            
-              <Buttons.PrimaryButton value="Login"
-              disabled={!(userID && password)}
-              className="submit-button"
-              onClick={handleSubmit}
-              />
-            
-          </form>
-
-          <div className="login_Page_forgot-actions">
-            <p>
-              <Link to="/forgotuserid">Forgot User ID</Link>
-            </p>
-            <div class="login_Page_vertical-line" />
-            <p>
-              <Link to="/forgotpassword">Forgot Password</Link>
-            </p>
-          </div>
-
-          <div class="login_Page_horizontal-line" />
-
-          <div className="login_Page_sign-up">
-            <p>
-              Don't have an account yet? <Link to="/sign-up">Sign Up</Link>
-            </p>
+    <div className="container-fluid">
+      <div className="row mobile-flex-column-reverse"> 
+        <div className="col-md-6 col-12 d-flex align-items-center login_Page_left-half ">
+          <div className="login_Page_left-half-inner">
+            <div className="login_Page_main-image-container">
+              <img src={loginPageMainImage} className="login_Page_main-image" />
+            </div>
+            <h5 className="login_Page_heading mt-5">Your data 100% Secure <br/> with us</h5>
+            <p className="mt-3">Lorem ipsum dolor sit amet, consectetur adipiscing <br/>
+                elit, sed do eiusmod tempor incididunt <br/>
+                ut labore et dolore magna aliqua.</p>
           </div>
         </div>
+        <div className="col-md-6 col-12 d-flex align-items-center justify-content-center login_Page_right-half">
+          <div className="login_Page_right-half-inner">
+            <div className="login_Page_contents">
+              <div className="login_Page_logo-container">
+                <img src={logo} className="login_Page_logo" />
+              </div>
+              <h5 className="login_Page_heading mt-5">Welcome back,</h5>
+              <form className="login-form w-100">
+                <label>User ID *</label>
+                <input
+                  type="text"
+                  name="userID"
+                  onChange={(e) => setUserID(e.target.value)}
+                  value={userID}
+                />
+
+                <label>Password *</label>
+                <input
+                  type="password"
+                  name="password"
+                  onChange={(e) => setPassword(e.target.value)}
+                  value={password}
+                />
+                  <Buttons.PrimaryButton value="Login"
+                  disabled={!(userID && password)}
+                  className="login-submit-button mt-4"
+                  onClick={handleSubmit}
+                  />
+              </form>
+              <div className="login_Page_forgot-actions mt-3">
+                <p className="m-0">
+                  <Link to="/forgotuserid">Forgot User ID</Link>
+                </p>
+                <div class="login_Page_vertical-line" />
+                <p className="m-0">
+                  <Link to="/forgotpassword">Forgot Password</Link>
+                </p>
+              </div>
+              <div class="login_Page_horizontal-line" />
+                <div className="login_Page_sign-up mt-5">
+                  <p>
+                    Don't have an account yet? <Link to="/sign-up">Sign Up</Link>
+                  </p>
+                </div>
+            </div>
+          </div>
+        </div>
+        
+       
       </div>
     </div>
   );
