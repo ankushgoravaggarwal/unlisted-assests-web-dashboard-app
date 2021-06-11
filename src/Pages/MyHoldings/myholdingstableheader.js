@@ -8,7 +8,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
 import TableArrow from "./table_arrow.svg"
-import "./myholdingstableheader.css" 
+import "./myholdingstableheader.scoped.css" 
 
 export default function MyHoldingsTableHeader(props){
 const {valueToOrderBy,orderDirection,handleRequestSort}=props
@@ -19,10 +19,10 @@ const TableArrowfunction =()=>{
   return(<div className="tableArrow"> <img src={TableArrow}  /> </div>)
 }
   return(
-    <TableHead>
-      <TableRow>
+    <TableHead >
+      <TableRow >
         <TableCell key="company" >
-          <TableSortLabel
+          <TableSortLabel style={{color: "#721B65"}}
           IconComponent={TableArrowfunction}
           active={valueToOrderBy === "company"}
           direction={valueToOrderBy === "company" ? orderDirection : 'asc'}
@@ -36,7 +36,7 @@ const TableArrowfunction =()=>{
 
         <TableCell key="verified">
             <TableSortLabel
-              
+              style={{color: "#721B65"}}
               IconComponent={TableArrowfunction}
               active={valueToOrderBy === "verified"}
               direction={valueToOrderBy === "verified" ? orderDirection : 'asc'}
@@ -48,6 +48,7 @@ const TableArrowfunction =()=>{
 
           <TableCell key="date">
               <TableSortLabel
+                style={{color: "#721B65"}}
                 IconComponent={TableArrowfunction}
                 active={valueToOrderBy === "date"}
                 direction={valueToOrderBy === "date" ? orderDirection : 'asc'}
@@ -61,6 +62,7 @@ const TableArrowfunction =()=>{
 
           <TableCell key="availableforsell">
             <TableSortLabel
+              style={{color: "#721B65"}}
               IconComponent={TableArrowfunction}
               active={valueToOrderBy === "availableforsell"}
               direction={valueToOrderBy === "availableforsell" ? orderDirection : 'asc'}
@@ -72,6 +74,7 @@ const TableArrowfunction =()=>{
 
           <TableCell key="action">
               <TableSortLabel
+                  style={{color: "#721B65"}}
                   IconComponent={TableArrowfunction}
                   active={valueToOrderBy === "action"}
                   direction={valueToOrderBy === "action" ? orderDirection : 'asc'}

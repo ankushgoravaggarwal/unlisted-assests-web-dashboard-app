@@ -1628,7 +1628,9 @@ font-size: 13px;
   align-items: center;   
   opacity: 0;
 }
-
+.galaxy ul.pagination li a {
+  height: 40px;
+}
 .hover-box button{
   padding: 8px 10px;
   font-weight: 700;

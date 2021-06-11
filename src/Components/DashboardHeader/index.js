@@ -4,7 +4,7 @@ import notificationIcon from "./notification_bell.png";
 import { useLocation, Link, useHistory } from "react-router-dom";
 import "./dashboardHeader.css";
 import ProfileWidget from "../ProfileWidget";
-import React, { useState } from "react";
+import React, { Component, useState } from "react";
 import Tooltip from '@material-ui/core/Tooltip';
 import { makeStyles } from '@material-ui/core/styles';
 import {clearAccessToken} from "../../Utils/Network"
@@ -36,7 +36,7 @@ let DashboardHeader = () => {
   let history = useHistory();
   const classes = useStyles();
 
-  const longText = <div style={{display:"flex",flexDirection:"column",width:"200px",height:"150px"}}> 
+  const longText = <div style={{display:"flex",flexDirection:"column",width:"200px",height:"100px"}}> 
 <h3 style={{cursor:"pointer",color:"#000000",fontSize: "14px"}} onClick={()=>{history.push("/profilewig")}}>Edit Profile</h3>
 <h3 style={{cursor:"pointer",color:"#000000",fontSize: "14px"}}>FAQ</h3>
 <h3 style={{cursor:"pointer",color:"#000000",fontSize: "14px"}}>Terms Of use</h3>
@@ -82,17 +82,48 @@ let DashboardHeader = () => {
   ));
 
   const [notification,setnotification] = React.useState({});
+  const [unread,setUnread] = React.useState(0)
+  const [invisible,setInvisible] = React.useState(true)
+  //const [seconds, setSeconds] = useState(0);
+
+
+
     React.useEffect(() => {
+
+
+      console.log("jijijijijijijijijijiji")
+      console.log("jijijijijijijijijijiji")
         getAllNotifications()
+      const interval = setInterval(() => {
+        getAllNotifications()
+        //setSeconds(seconds => seconds + 1);
+      }, 15000);
+
+      return () => clearInterval(interval);
       }, []);
+
+
     const getAllNotifications = async function (){
-        let response = await apiCall("​notificationua​/findallaccount",'GET')
+      console.log("jijijijijijijijijijiji2")
+        let response = await apiCall("notificationua/notificationunreadcount",'GET')
+      console.log("jijijijijijijijijijiji12")
         console.log(response)
         let responseJSON = await response.json();
-        console.log(responseJSON)
-        setnotification(responseJSON)
+         console.log("nnnn"+responseJSON.notificationUnReadCount)
+        await setnotification(responseJSON)
+
+      console.log(responseJSON.notificationUnReadCount+"ab")
+      if(responseJSON.notificationUnReadCount == 0 || responseJSON.notificationUnReadCount == undefined) {
+        setInvisible(true);
+        console.log("gogogo1"+invisible)
+      } else {
+        setInvisible(false);
+        setUnread(responseJSON.notificationUnReadCount);
+        console.log("gogogo2"+invisible+unread)
+      }
     }
-    const [anchorEl, setAnchorEl] = React.useState(null);
+    
+  const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
 
   const handleClick = (event) => {
@@ -144,7 +175,8 @@ let DashboardHeader = () => {
           </div>
         </div>
         <div className="left-side col-md-2 col-4 d-flex align-items-center justify-content-center">
-          <Badge badgeContent={notification.notificationUnReadCount} color="primary" 
+          <Badge badgeContent={unread} color="primary" 
+          invisible={invisible}
           anchorOrigin={{
             vertical: 'bottom',
             horizontal: 'left',

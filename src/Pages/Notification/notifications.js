@@ -6,39 +6,79 @@ import copyfile from "./copyfile.png"
 import "./notification.scoped.css"
 import Buttons from "../../Components/Buttons";
 import { apiCall } from '../../Utils/Network';
+import {
+    useHistory
+} from "react-router-dom";
 
 export default function Notifications(){
 
+    let history = useHistory();
+
     const [notification,setnotification] = React.useState({});
-    React.useEffect(() => {
+    //const [notificationlist,setNotificationlist] = React.useState([]);
+    React.useEffect( () => {
         getAllNotifications()
-      }, []);
+
+        // const interval = setInterval(async () => {
+        //     await getAllNotifications()
+        //     //setSeconds(seconds => seconds + 1);
+        // }, 20000);
+        //
+        // return () => clearInterval(interval);
+
+    }, []);
     const getAllNotifications = async function (){
-        let response = await apiCall("​notificationua​/findallaccount",'GET')
+        let response = await apiCall("notificationua/findallaccount",'GET')
         console.log(response)
         let responseJSON = await response.json();
         console.log(responseJSON)
-        setnotification(responseJSON)
+        await setnotification(responseJSON)
+
+
+        //await setNotificationlist(notificationlist1)
+        await apiCall("notificationua/notificationunreadaccount",'PUT')
+
     }
+
     let notificationlist = []
     for (let i=0;i<notification.length;i++){
-        notification[i].push(
+        notificationlist.push(
             <div className="notification_row">
-            <div>
-                <img src={money}/>
-            </div>
-            <div className="notification_marginLeft">
-                <p>{notification.message}</p>
-                <p>{notification.updateDate}</p>
-            </div>
+                <div>
+                    <img src={notification[i].notificationImage}/>
+                </div>
+                <div className="notification_marginLeft">
+                    <p>{notification[i].message}</p>
+                    <p>{notification[i].updateDate}</p>
+
+                    {/*<Buttons.PrimaryButton value="See Details"*/}
+
+                    {/*                       onClick={()=>{*/}
+                    {/*                                    //trade*/}
+                    {/*                                    //trade forms*/}
+                    {/*                                    //holding*/}
+                    {/*                                    //holding forms*/}
+                    {/*                                    //ongoingtxn*/}
+                    {/*                                    //negotiations window*/}
+                    {/*                                    //aggrement window*/}
+                    {/*                                   // history.push({ pathname: "/notification[i].messageType" })*/}
+                    {/*                           }*/}
+                    {/*                       }*/}
+                    {/*/>*/}
+
+                </div>
+
+
             </div>
 
         )
     }
+
+
     return(<div className="notification_container">
         <div className="notification_container1">
             {notificationlist}
-            
+
 
             {/* <div className="notification_row">
             <div>
@@ -131,5 +171,5 @@ export default function Notifications(){
             </div> */}
 
         </div>
-        </div>)
+    </div>)
 }

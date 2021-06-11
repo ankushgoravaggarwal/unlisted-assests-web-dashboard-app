@@ -194,7 +194,7 @@ export default function BuyerForm(props){
                 </div>
             </div>
             <div className="d-flex justify-content-center">
-                <Buttons.SecondaryButton value="Cancel" onClick={()=>{props.setNewoffer(false)}}/>
+                <Buttons.SecondaryButton value="Cancel" style={{marginRight:"5px"}} onClick={()=>{props.setNewoffer(false)}}/>
                 <Buttons.PrimaryButton value="Send" onClick={buyerformsend}/>
             </div>
 

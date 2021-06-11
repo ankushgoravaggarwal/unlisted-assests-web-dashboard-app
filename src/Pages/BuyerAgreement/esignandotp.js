@@ -14,8 +14,8 @@ export default function EsignAndOtp (){
         </div>
 
     <div style={{display:"flex",flexDirection:"column"}}>           
-    <BuyerVirtualAccount/>
-        {/*<div className="buyeragreement_container" >
+    
+        <div className="buyeragreement_container" >
         
         <div className="buyeragreement_container1" style={{height:"70%"}}>
                
@@ -65,7 +65,7 @@ export default function EsignAndOtp (){
             <Buttons.PrimaryButton value="Virtual Account Dashboard" style={{width:"50%",marginLeft:"0%"}}/>
         </div>
         </div> 
-        </div> */}
+        </div>
         </div>
         </div> )
 }

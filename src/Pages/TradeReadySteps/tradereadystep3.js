@@ -73,13 +73,12 @@ let AddDematAccount =()=>{
         // let response = await fetch('getholding').toJson()
         // setRowInformation(response)
         let requestBody ={
-            "id": 159,
+
             "dmatId": dematid,
             "dpId": dpid,
             "boId": boid ,
             "depositoryName": depositoryName,
-            "brokerName": brokerName,
-            "cmrCopy": null
+            "brokerName": brokerName
         }
        
         let response = await apiCall("useronboarding/dmat", 'POST',requestBody)
@@ -98,7 +97,7 @@ let AddDematAccount =()=>{
 
     return(<div className="Trade_ready_step_3_container Trade_ready_step_3_text">
         <div>
-            <h3>Add Your Demat account</h3>
+            <h4>Add Your Demat account</h4>
             <form>
                 <label className="Trade_ready_step_3_Label">Demat ID*</label>
                 <input type="text"
@@ -135,9 +134,9 @@ let AddDematAccount =()=>{
             </div>
             
             <div className="Trade_ready_step_3_save_button">
-                <p><a>I want To Skip</a></p>
+                <p style={{fontSize:"14px",width:"150px"}}><u>I want To Skip</u></p>
             <Buttons.SecondaryButton value="Previous" />    
-            <Buttons.PrimaryButton value="Save & Continue" onClick={saveContinue}/>
+            <Buttons.PrimaryButton value="Save & Continue" onClick={saveContinue} style={{width:"150px"}}/>
             </div>
         </div>
         

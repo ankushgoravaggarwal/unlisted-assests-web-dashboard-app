@@ -11,7 +11,7 @@ let SellerCard = ({values}) => {
                 <p className="m-0">HDFC banks</p>
                 <h6 className="m-0 text-dark mr-2"><b>₹ {values.offeredQuantity}</b></h6>
             </div>
-            <div className="seller-card-desc mt-2 d-flex justify-content-between">
+            <div className="seller-card-desc mt-3 d-flex justify-content-between">
                 <p className="m-0">Price / Share</p>
                 <p className="price m-0">₹ {values.offeredPrice}</p>
             </div>

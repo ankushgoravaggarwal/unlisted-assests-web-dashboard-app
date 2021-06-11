@@ -41,6 +41,8 @@ function AddHoldingsForm() {
     const [vestedError, setVestedError] = React.useState('')
     const [showVestedError, setshowVestedError] = React.useState('')
   const [holding,setHolding] = React.useState({})
+    const [userAlreadyExistsError,setUserAlreadyExistsError] = React.useState('')
+    const [showUserAlreadyExistsError,setShowUserAlreadyExistsError] = React.useState('')
 
 
 
@@ -72,6 +74,16 @@ function AddHoldingsForm() {
 
   }
 
+    let InlineValidationBoxUserAlreadyExists = () => {
+        return (
+            <div className="inline-validation-box">
+                <p>
+                    Note: Holding already exists for this company’s Share type. You can continue to create a “New Holding” for another share type or add edit your existing holding.
+                </p>
+                <Link to="/holdings">Go to my existing Holdings</Link>
+            </div>
+        )
+    }
 
     let InlineValidationBoxExistingVestedError = () => {
         return (
@@ -148,19 +160,15 @@ function AddHoldingsForm() {
     let requestBody = {
       "companyName": selectedCompany.label,
       "companyId": selectedCompany.value,
-      "productId": 2,
       "commodityId": selectedCommodity.value,
       "commodityName": selectedCommodity.label,
       "qtyTotal": qtyHeld,
-      "qtySale": 0,
-      "qtyFreezed": 2,
+
       "isDemated": dematBoolean,
       "isVested": vestedBoolean,
       // "specialConditionTransfer": specialConditionForTransfer,
-      "createDate": null,
-      "updateDate": null,
-      "uaVerificationStatus": "2",
-      "uaVerificationRemark": "2",
+
+
       "proofDocument": null
 
     }
@@ -177,8 +185,9 @@ function AddHoldingsForm() {
     let response = await apiCall("myholding/", 'POST', requestBody)
 
       if (response.status === 409) {
+          setShowUserAlreadyExistsError(true);
+          setUserAlreadyExistsError("User already exists with the provided email or mobile...");
 
-      return
     } else if (response.status === 400) {
         let responseJSON = await response.json()
         let i = 0;
@@ -189,8 +198,8 @@ function AddHoldingsForm() {
             validate(errorResponse.field,errorResponse.errorMessage)
         );
     }
-    else {
-
+    else if(response.status === 200){
+       await clearErrorMessages();
       let responseJSON = await response.json()
       setHolding(responseJSON)
 
@@ -199,22 +208,30 @@ function AddHoldingsForm() {
       console.log("responseJson", responseJSON)
 
       setOpen(true);
-    }
+    } else {
+          setShowUserAlreadyExistsError(true);
+          setUserAlreadyExistsError("some problem occured, contact the admin...");
+      }
 
 
   }
 
-  const clearErrorMessages = () => {
-      setSelectedCompanyError('');
-      setSelectedCommodityError('');
-      setQtyHeldError('');
-      setDematedError('');
-      setVestedError('');
-      setSelectedCompanyError('');
+  const clearErrorMessages = async () => {
+      await setShowSelectedCompanyError(false);
+      await setSelectedCompanyError('');
+      await setShowSelectedCommodityError(false);
+      await setSelectedCommodityError('');
+      await setShowQtyHeldError(false);
+      await setQtyHeldError('');
+      await setShowDematedError(false);
+      await setDematedError('');
+      await setshowVestedError(false);
+      await setVestedError('');
   }
 
     const validate = async (field, errorMessage) => {
       console.log("hihhihihihihihihihihihihihihihihihiiiiiii"+field, errorMessage)
+        await clearErrorMessages();
         switch (field) {
             case 'companyName':
                 console.log("hooooooooooooooooo1"+errorMessage)
@@ -235,21 +252,21 @@ function AddHoldingsForm() {
 
                 console.log("hooooooooooooooooo111"+errorMessage)
                 await setShowQtyHeldError(true);
-                setQtyHeldError(errorMessage);
+                await setQtyHeldError(errorMessage);
 
                 break;
 
             case 'isDemated':
                 console.log("hooooooooooooooooo1111"+errorMessage)
-                setShowDematedError(true);
-                setDematedError(errorMessage);
+                await setShowDematedError(true);
+                await setDematedError(errorMessage);
                 break;
 
 
             case 'isVested':
                 console.log("hooooooooooooooooo11111"+errorMessage)
-                setshowVestedError(true);
-                setVestedError(errorMessage);
+                await setshowVestedError(true);
+                await setVestedError(errorMessage);
                 break;
 
             default:
@@ -269,30 +286,30 @@ function AddHoldingsForm() {
 
   return (
     <div className="addholding-form" >
-      <div>
-        <h1>Create Holding</h1>
+      <div className="addholding-form_Title">
+        <h3>Create Holding</h3>
+        <hr/>
       </div>
       <div className="addholding-form_field ">
         <label>Company Name*</label>
         <Select options={allCompany} onChange={selectedOption => setSelectedCompany(selectedOption)} value={selectedCompany}/>
-
-      </div>
         {showSelectedCompanyError ? <InlineValidationBoxExistingSelectedCompanyError /> : null}
-
-
-
+        { showUserAlreadyExistsError ? <InlineValidationBoxUserAlreadyExists/> : null}
+      </div>
+        
       <div className="addholding-form_field addholding-form_field-2">
         <div>
           <label>Share Type*</label>
           <Select options={allCommodity} onChange={selectedOption => setSelectedCommodity(selectedOption)} value={selectedCommodity}/>
-
-        </div>
           {showSelectedCommodityError ? <InlineValidationBoxExistingSelectedCommodityError /> : null}
-          <div>
+        </div>
+          
+          <div className="addholding-form_field ">
           <label>Quantity*</label>
           <input value={qtyHeld} onChange={(e) => setQtyHeld(e.target.value)}/>
+          {showQtyHeldError ? <InlineValidationBoxExistingQtyheldError/> : null }
         </div>
-          <InlineValidationBoxExistingQtyheldError />
+          
       </div>
       <div className="addholding-form_field">
         <p>Vested*</p>
@@ -306,10 +323,10 @@ function AddHoldingsForm() {
             <label for="no">No</label>
             <input type="radio" id="vested" name="vested" value="no" checked={vested === "no" ? true : false} onChange={(e) => setVested("no")}/>
           </div>
-
         </div>
-      </div>
         {showVestedError ? <InlineValidationBoxExistingVestedError /> : null}
+      </div>
+        
       <div className="addholding-form_field">
         <p>Demated*</p>
         <div className="addholding-form_radio-btn-group">
@@ -322,7 +339,7 @@ function AddHoldingsForm() {
             <input type="radio" id="demated" name="demated" value="no" checked={demated === "no" ? true : false} onChange={(e) => {setDemated("no")}}/>
           </div>
         </div>
-          {showDematedError ? <InlineValidationBoxExistingDematedError /> : null}
+        {showDematedError ? <InlineValidationBoxExistingDematedError /> : null}
       </div>
       <div className="addholding-form_field "></div>
       <div className="addholding-form_field ">
@@ -337,13 +354,13 @@ function AddHoldingsForm() {
         </p>
       </div>
       <div className="addholding-form_note">
-        <div><img src={vector} style={{margin:"10px",paddingTop:"20px"}}/></div>
+        <div><img src={vector} style={{margin:"10px"}}/></div>
         <div>
         <p>
-          Note: Uploading a fake or an outdated inventory is punishable by law.
+          <b>Note:</b> Uploading a fake or an outdated inventory is punishable by law.
           Please verify your inventory thoroughly to avoid any Infringement.
           This will lead to permanent blocking of your credentials from our
-          platform. Click here to read guideleines.
+          platform.<br/><b>Click here to read guideleines.</b>
         </p>
         </div>
       </div>

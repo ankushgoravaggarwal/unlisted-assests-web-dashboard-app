@@ -12,6 +12,7 @@
 .table-container {
     flex: .85;
     margin-right: 20px;
+    margin-top: 40px;
 }
 
 #add-holdings-button{

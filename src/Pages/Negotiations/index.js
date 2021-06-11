@@ -3,7 +3,7 @@ import Breadcrumbs from "../../Components/Breadcrumbs";
 import "./negotiations.css";
 import BuyerCard from "../../Components/BuyerCard"
 import SellerCard from "../../Components/SellerCard";
-import Buttons from "../../Components/Buttons";
+import Buttons from "../../Components/Buttons"
 import BuyersTab from "../../Components/Negotiation CompanyList/BuyersTabs"
 import SelectedAssest from "../../Components/SelectedAssest";
 import successImage from "../../Components/Toast/green_check_small_filled.png";
@@ -16,6 +16,7 @@ import {
 import BuyerForm from "../../Components/BuyerForm/buyerform"
 import { apiCall } from "../../Utils/Network";
 import 'bootstrap/dist/css/bootstrap.min.css';
+
 let Negotiations = (props) => {
     //const [tradecommunication,setTradeCommunication] = React.useState({});
    const [tradecommunication1,setTradeCommunication1] = React.useState([]);
@@ -25,14 +26,26 @@ let Negotiations = (props) => {
     const [newoffer,setNewoffer] = React.useState(false);
     const [offeraccepted,setOfferaccepted] = React.useState(false);
     const [offerrejected,setOfferrejected] = React.useState(false);
-      const acceptorreject = function (x){
-            reqBody = x;
-            console.log("acceptorreject called",x)
+    const [islastoffermine1,setislastoffermine1] = React.useState(false);
+    const [newOfferButtonText,setNewOfferButtonText] = React.useState("New Offer");
+
+      const acceptorreject = function (){
+
+          setNewoffer(false)
+          setOfferaccepted(false)
+          setOfferrejected(false)
+          setislastoffermine1(true)
+          setNewOfferButtonText("Revised Offer")
+            //console.log("acceptorreject called",x)
         }
 
     let chatBalloons = [];
     let tradecommunication= {};
 
+    let isRejected = false;
+    let isAccepted = false;
+
+    let isLastOfferMine = false;
 
     var reqBody = {
 
@@ -46,9 +59,17 @@ let Negotiations = (props) => {
 
 
 
-    React.useEffect( async () => {
+    React.useEffect( () => {
         console.log("hi calling**********")
-        await GetTradeCommunication();
+        GetTradeCommunication();
+
+        // const interval = setInterval(() => {
+        //     GetTradeCommunication();
+        //     acceptorreject()
+        //     //setSeconds(seconds => seconds + 1);
+        // }, 25000);
+        //
+        // return () => clearInterval(interval);
     },[])
 
     const GetTradeCommunication = async () => {
@@ -70,12 +91,30 @@ let Negotiations = (props) => {
 
             creatingChatBallons()
 
+
+            if(isRejected) {
+                console.log("abababsbababa")
+                setOfferrejected(true)
+                setNewOfferButtonText("New Offer")
+            }
+            if(isAccepted) {
+                console.log("abababsbababa1")
+                setOfferaccepted(true)
+            }
+
+            if(isLastOfferMine) {
+                setislastoffermine1(true)
+                setNewOfferButtonText("Revised Offer")
+            } else if (!isRejected && !isAccepted) {
+                setNewOfferButtonText("Counter Offer")
+            }
+
             console.log("ma2"+tradecommunication.length)
        } catch (err) {
             console.log(err);
         }
     }
-    
+
 
     const acceptButton = function(){
         return(<React.Fragment>
@@ -85,9 +124,13 @@ let Negotiations = (props) => {
                     await apiCall("tradecommunication/",'POST',reqBody)
                     console.log(reqBody)
                     console.log("accept called")
-                    //await setNewoffer(false)
+
                     GetTradeCommunication()
-                    //await setOfferaccepted(true)
+                    setOfferaccepted(true)
+                    setNewoffer(false)
+                    setOfferrejected(false)
+                    setislastoffermine1(false)
+                    setislastoffermine1("New Offer")
                 }} />
         </React.Fragment>
 
@@ -96,23 +139,40 @@ let Negotiations = (props) => {
 
     const rejectButton = function(){
 
-        return(
-            <React.Fragment>
+        return(<React.Fragment>
                 <Buttons.SecondaryButton value="Reject" onClick={async ()=>{
                     //setOfferrejected(true)
                     reqBody.communicationStatus = "rejected"
                     await apiCall("tradecommunication/",'POST',reqBody)
                     console.log(reqBody)
                     console.log("reject called")
-                    //await setNewoffer(false)
+
                     GetTradeCommunication()
+                    setOfferrejected(true)
+                    setOfferaccepted(false)
+                    setNewoffer(false)
+                    setislastoffermine1(false)
+                    setislastoffermine1("New Offer")
+
                 }}/>
             </React.Fragment>
        )
     }
     const newOfferButton = function(){
-        return(<React.Fragment>
-                <Buttons.SecondaryButton value="New Offer" onClick={()=>{setNewoffer(true)}}/>
+        return(
+
+
+            <React.Fragment>
+
+                <Buttons.SecondaryButton value={newOfferButtonText} onClick={ async ()=>{
+
+                    setNewoffer(true)
+                    setislastoffermine1(true) //not needed still setting up, setNewoffer is enough
+                    setOfferrejected(false)
+                    setOfferaccepted(false)
+                    setislastoffermine1("New Offer")
+
+                }}/>
             </React.Fragment>
         )
     }
@@ -123,7 +183,7 @@ let Negotiations = (props) => {
                 <br />
                 <div style={{display:"flex",justifyContent:"center",width:"100%"}}>
                     <BuyerForm newoffer={newoffer} setNewoffer={setNewoffer} callback={GetTradeCommunication} tradecommunication1={tradecommunication}
-                               acceptorreject={acceptorreject}
+                               acceptorreject={acceptorreject} offerReject={offerrejected}
                     />
                 </div>
             </React.Fragment>
@@ -135,35 +195,35 @@ let Negotiations = (props) => {
     const RejectCard = function(){
         return(
             <React.Fragment>
-            <br />
-            <div style={{display:"flex",justifyContent:"center",width:"100%"}}>
-            <div>
-            <div className="reject-tost"> 
-                    <div className="d-flex align-items-center">
-                      <img src={rejectImage} className="m-2" width="30" height="30"/>
-                      <h4 className="m-0 ">Offer Rejected</h4>
+                <br />
+                <div style={{display:"flex",justifyContent:"center",width:"100%"}}>
+                    <div>
+                        <div className="reject-tost">
+                            <div className="d-flex align-items-center">
+                                <img src={rejectImage} className="m-2" width="30" height="30"/>
+                                <h4 className="m-0 ">Offer Rejected</h4>
+                            </div>
+                            <div style={{marginLeft:"40px"}}>
+                                <p>Oops! your order has been<br/> Rejected!
+                                    You can proceed to the<br/> our safe transaction portal!
+                                </p>
+                            </div>
+                            {/*<div style={{display:"flex",justifyContent:"flex-end",marginRight:"10px",color: "#00CC83"}}>*/}
+                            {/*    <h3 style={{cursor:"pointer"}}>Go To Transactions</h3>*/}
+                            {/*</div>*/}
+                        </div>
                     </div>
-                    <div style={{marginLeft:"40px"}}>
-                        <p>Oops! your order has been<br/> Rejected!
-                            You can proceed to the<br/> our safe transaction portal!
-                        </p>
-                    </div>
-                    {/*<div style={{display:"flex",justifyContent:"flex-end",marginRight:"10px",color: "#00CC83"}}>*/}
-                    {/*    <h3 style={{cursor:"pointer"}}>Go To Transactions</h3>*/}
-                    {/*</div>*/}
-            </div>
-            </div>
-            </div>
-        </React.Fragment>
+                </div>
+            </React.Fragment>
 
         )
     }
     const AcceptCard = function () {
 
         return(<React.Fragment>
-            <br />
-            <div className="d-flex align-items-center justify-content-center w-100">
-                <div className="accept-tost"> 
+                <br />
+                <div className="d-flex align-items-center justify-content-center w-100">
+                    <div className="accept-tost">
                         <div className="d-flex align-items-center">
                             <img src={successImage} className="m-2" height="30" width="30"/>
                             <h4 className="m-0">Offer Accepted</h4>
@@ -176,13 +236,14 @@ let Negotiations = (props) => {
                         {/*<div style={{display:"flex",justifyContent:"flex-end",marginRight:"10px",color: "#00CC83"}}>*/}
                         {/*    <h3 style={{cursor:"pointer"}}>Go To Transactions</h3>*/}
                         {/*</div>*/}
+                    </div>
                 </div>
-            </div>
-        </React.Fragment>
+            </React.Fragment>
 
         )
-        
+
     }
+
 
 
     const acceptrehectnewofferbutton = () => {
@@ -224,6 +285,11 @@ let Negotiations = (props) => {
 
             if(tradecommunication[i].tradeNegotiatorType === "buy"
                 && tradecommunication[i].communicationStatus == "newoffer"){
+
+                if (i ==  tradecommunication.length-1
+                && tradecommunication[i].isYourCommunication) {
+                    isLastOfferMine = true;
+                }
                 chatBalloons.push(
                     <React.Fragment>
                         <br />
@@ -237,10 +303,16 @@ let Negotiations = (props) => {
             }
             else if(tradecommunication[i].tradeNegotiatorType === "sell"
                 && tradecommunication[i].communicationStatus == "newoffer") {
+
+                if (i ==  tradecommunication.length-1
+                    && tradecommunication[i].isYourCommunication) {
+                    isLastOfferMine = true;
+                }
+
                 chatBalloons.push(
                     <React.Fragment>
                         <br />
-                        <div style={{display:"flex",justifyContent:"center",paddingLeft:"250px"}}>
+                        <div className="seller-side-info">
                             <h6 className="text-dark"><b>Seller {b}</b><span className="time text-small text-dark">11:00 PM</span></h6>
                         </div>
                         <div className="sellercard">
@@ -252,24 +324,33 @@ let Negotiations = (props) => {
                 && (tradecommunication[i].communicationStatus == "accepted"
                     || tradecommunication[i].communicationStatus == "rejected")) {
                 if(tradecommunication[i].communicationStatus == "accepted") {
+                    if (i ==  tradecommunication.length-1) {
+                        isAccepted = true;
+                    }
 
-                    //setOfferaccepted(true)
                     chatBalloons.push(
                         <React.Fragment>
                             <br />
                             <div className="buyercard">
                                 <h3>Buyer {a}</h3>
+
                                 <AcceptCard />
+
                             </div>
                         </React.Fragment>
                     )
                 } else {
+                    if (i ==  tradecommunication.length-1) {
+                        isRejected = true
+                    }
+
                     chatBalloons.push(
                         <React.Fragment>
                             <br />
                             <div className="buyercard">
                                 <h3>Buyer {a}</h3>
                                 <RejectCard/>
+
                             </div>
                         </React.Fragment>
                     )
@@ -280,7 +361,9 @@ let Negotiations = (props) => {
                 && (tradecommunication[i].communicationStatus == "accepted"
                     || tradecommunication[i].communicationStatus == "rejected")) {
                 if(tradecommunication[i].communicationStatus == "accepted") {
-                    //setOfferaccepted(true)
+                    if (i ==  tradecommunication.length-1) {
+                        isAccepted = true;
+                    }
 
                     chatBalloons.push(
                         <React.Fragment>
@@ -289,11 +372,17 @@ let Negotiations = (props) => {
                                 <h6 className="text-dark user-title"><b>Seller {b}</b></h6>
                             </div>
                             <div className="sellercard">
+
                                 <AcceptCard />
+
                             </div>
                         </React.Fragment>
                     )
                 } else {
+                    if (i ==  tradecommunication.length-1) {
+                        isRejected = true;
+                    }
+
                     chatBalloons.push(
                         <React.Fragment>
                             <br />
@@ -301,7 +390,9 @@ let Negotiations = (props) => {
                                 <h6 className="text-dark user-title"><b>Seller {b}</b></h6>
                             </div>
                             <div className="sellercard">
+
                                 <RejectCard/>
+
                             </div>
                         </React.Fragment>
                     )
@@ -318,7 +409,7 @@ let Negotiations = (props) => {
         <div className="container-fluid">
             <Breadcrumbs/>
             <div className="my-card">
-                <div className="row"> 
+                <div className="row">
                     <div className="col-md-3 col-12">
                         <div className="ongoing-negotiations Negotiations-left-section">
                             <NegotiationCompanyList/>
@@ -326,20 +417,23 @@ let Negotiations = (props) => {
                     </div>
                     <div className="col-md-9 col-12">
                         <div className="active-negotiation Negotiations-right-section mobi-none">
-                                <div className="mobi-none">
-                                    <SelectedAssest />
+                            <div className="mobi-none">
+                                <SelectedAssest />
+                            </div>
+                            <div className="conversation ">
+                                <div className="conversation_inner">
+
+                   {tradecommunication1}
+                        {console.log("choccho"+newoffer+offerrejected+offeraccepted+islastoffermine1)}
+                        { offeraccepted ? null :
+                                                tradecommunication1.length == 0 || newoffer || offerrejected || islastoffermine1 ? newOfferCard() :
+                                                                                                                      acceptrehectnewofferbutton()
+                        }
+
                                 </div>
-                                <div className="conversation ">
-                                    <div className="conversation_inner">
-                            {tradecommunication1}
-                                    { offeraccepted ? null :
-                                                            tradecommunication1.length == 0 || newoffer === true ? newOfferCard() :
-                                                                                                                                                    acceptrehectnewofferbutton()
-                                    }
-                                    </div>
-                                </div>
+                            </div>
                         </div>
-                       
+
                     </div>
                 </div>
             </div>
@@ -347,21 +441,22 @@ let Negotiations = (props) => {
                 <div>
                     <BuyersTab/>
                 </div>
-                            <div className="active-negotiation Negotiations-right-section">
-                                    <div className="mobi-none">
-                                        <SelectedAssest />
-                                    </div>
-                                    <div className="conversation ">
-                                        <div className="conversation_inner">
-                                {tradecommunication1}
-                                        { offeraccepted ? null :
-                                                                tradecommunication1.length == 0 || newoffer === true ? newOfferCard() :
-                                                                                                                                                        acceptrehectnewofferbutton()
-                                        }
-                                        </div>
-                                    </div>
-                            </div>
+                <div className="active-negotiation Negotiations-right-section">
+                    <div className="mobi-none">
+                        <SelectedAssest />
+                    </div>
+                    <div className="conversation ">
+                        <div className="conversation_inner">
+                        {tradecommunication1}
+                            {console.log("choccho"+newoffer+offerrejected+offeraccepted+islastoffermine1)}
+                            { offeraccepted ? null :
+                                tradecommunication1.length == 0 || newoffer || offerrejected || islastoffermine1 ? newOfferCard() :
+                                    acceptrehectnewofferbutton()
+                            }
                         </div>
+                    </div>
+                </div>
+            </div>
         </div>
     )
 }

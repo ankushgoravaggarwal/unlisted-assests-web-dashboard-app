@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import ProfileWidget from "../../Components/ProfileWidget";
 import FullWidthTabs from "../../Components/TradeReadyTab/tradereadytab";
 import AddVirtualAccount from "../VirtualAccount/virtualaccount";
@@ -36,10 +35,10 @@ let ProfileWidgetAndProfile = () => {
     <div className="container-fluid mt-4">
       <div className="row">
         <div className="col-md-2"></div>
-        <div className="col-md-10">
-          <div className="breathumbs-top">
+      <div className="col-md-10">
+        <div className="breathumbs-top">
             <ul>
-              <li><Link to="/"><FontAwesomeIcon icon={faHome} /></Link></li>
+              <li><FontAwesomeIcon icon={faHome} /></li>
               <li><img src={breathumbs} /></li>
               <li>Trade Ready Step</li>
             </ul>

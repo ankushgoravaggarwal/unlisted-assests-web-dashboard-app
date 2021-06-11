@@ -67,6 +67,9 @@ import KYCVerification from "./Pages/AuditerScreen/kycverification";
 import Notifications from "./Pages/Notification/notifications";
 import BuyerVirtualAccount from "./Pages/BuyerAgreement/buyervirtualaccount";
 import BuyerSendToVA from "./Pages/BuyerAgreement/buyersendmoneytovirtual";
+import SellerDematAccount from "./Pages/SellerAgreement/sellervirtualaccount";
+import AadharLinked from "./Pages/TradeReadySteps/tradereadystep6";
+import TrusteeRejection from "./Pages/TrusteeRejection/TrusteeRejection";
 
 export default function App() {
   return (
@@ -139,6 +142,13 @@ export default function App() {
           <Route path="/buyersendtovirtual">
             <BuyerSendToVA/>
           </Route>
+          <Route path="/sellervirtualaccount">
+            <DashboardHeader/>
+            <SellerDematAccount/>
+          </Route>
+          <Route path="/trusteerejection">
+            <TrusteeRejection/>
+          </Route>
           <Route path="/buyeragreement">
           <DashboardHeader />
           <BuyerAgreement/>
@@ -165,7 +175,7 @@ export default function App() {
           </PrivateRoute>
           <PrivateRoute path="/edit_inventory">
             <DashboardHeader />
-            <EditInventory />
+            <EditInventory /> 
           </PrivateRoute>
           <PrivateRoute path="/negotiations">
             <DashboardHeader />
@@ -188,12 +198,11 @@ export default function App() {
           <Holdings/> 
           </PrivateRoute>
 
-          <PrivateRoute path="/addholdings">
-            <DashboardHeader />
-            {/* <Dashboard /> */}
-            {/* <Holdings/> */}
-            <AddHoldings />
-          </PrivateRoute>
+        <PrivateRoute path="/addholdings">
+          <DashboardHeader />
+          <AddHoldings />
+        </PrivateRoute>
+
           <PrivateRoute path="/signagreement">
             <DashboardHeader />
             <SignAgreement />
@@ -214,6 +223,9 @@ export default function App() {
             <DashboardHeader />
             <StepperArea />
           </PrivateRoute>
+          <Route path="/aadharlinked">
+            <AadharLinked/>
+          </Route>
           <Route path="/resetpasswordnotlogin">
             {/* <DashboardHeader /> */}
             <ResetPasswordNotLogIn />

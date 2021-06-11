@@ -68,13 +68,12 @@ input#myfile {
     padding-bottom: 40px;
 }
 .Trade_ready_step_2_bank_image_container{
-    width: 610px;
-    height: 458px;
+    padding: 20px;
     border: 1px solid #CFCBCF;
-    box-sizing: border-box;
+    height: fit-content;
     filter: drop-shadow(0px 5px 50px #E5E9F3);
     border-radius: 22px;
-    padding: 80px;
+
 
 }
 .Trade_ready_step_2_save_button{

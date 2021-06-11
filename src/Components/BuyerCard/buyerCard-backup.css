@@ -1,0 +1,68 @@
+.buyer-card {
+    background: rgba(46, 56, 77, 0.03);
+    width: 350px;
+    border: 1px solid rgba(46, 56, 77, 0.6);
+    border-radius: 0px 20px 20px 20px;
+    padding: 8px;
+    
+}
+.buyer_card_accepted{
+    background: green;
+    width: 350px;
+    border: 1px solid rgba(46, 56, 77, 0.6);
+    border-radius: 0px 20px 20px 20px;
+    padding: 8px;
+}
+.buyer-card .row {
+    display: flex;
+    justify-content: space-between;
+}
+.buyer-card .buyer_card_Company_logo{
+    position: absolute;
+    padding-top:1% ;
+}
+.buyer_card_first_row{
+    display: flex;
+    padding-left: 10%;
+    justify-content: space-between;
+    
+}
+.Buyercard_horizontal_line{
+    border: 1px solid #CFCBCF;
+    width: 100%;
+}
+.buyer-user-comment{
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 10px;
+    line-height: 12px;
+    color: #2E384D;}
+
+.buyer-user-message{
+font-family: Montserrat;
+font-style: normal;
+font-weight: 500;
+font-size: 14px;
+line-height: 17px;
+/* identical to box height */
+text-align: right;
+color: #2E384D;
+
+    }
+.buyer-proposed_amt{
+    font-family: Montserrat;
+font-style: normal;
+font-weight: 500;
+font-size: 16px;
+line-height: 20px;
+
+/* identical to box height */
+
+color: #721B65;
+}
+.buyer-proposed-amt-in-numbers{
+    font-weight: bold;
+font-size: 16px;
+color: #721B65;
+}

@@ -10,6 +10,8 @@ const additionalConditions = [
 ];
 
 function EditHoldingsForm({ allCommodity, editedData, handleChange, submit }) {
+
+  
   return (
     <form className="editholding-form">
       <div className="editholding-form_field addholding-form_field-2">
@@ -33,7 +35,7 @@ function EditHoldingsForm({ allCommodity, editedData, handleChange, submit }) {
             onChange={(e) => handleChange("qtyTotal", e.target.value)}
           />
         </div>
-      </div>
+       </div>
       <div className="editholding-form_field">
         <p>Vested*</p>
         <form className="editholding-form_radio-btn-group">

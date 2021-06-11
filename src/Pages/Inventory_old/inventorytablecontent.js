@@ -11,14 +11,14 @@ import TableHeader from './myinventorytableheader';
 import { makeStyles } from '@material-ui/core/styles';
 import SunPharma from "./sun_pharma.svg";
 import "./inventorytablecontent.css"
+import "../../Components/FilterCard/filterCard.css"
 import Buttons from "../../Components/Buttons"
-import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
-import Button from '@material-ui/core/Button';
-import EditIcon from '@material-ui/icons/Edit';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import ToogleButton from '../../Components/ToogleButton/toogleswitch';
+import "../Companies/bootstrap4/css/bootstrap.scoped.css"
+import FilterCard from "../../Components/FilterCard"
+import PriceRangeSlider from '../Companies/PriceRangeSlider';
+import "../Companies/style.scoped.css"
+import axios from 'axios'
+
 
 import {
     BrowserRouter as Router,
@@ -58,10 +58,10 @@ const useStyles = makeStyles({
     },
     container: {
       maxHeight: 700,
-      width: 700,
+      width: "border-box",
       border: "1px solid #CFCBCF",
-      borderRadius:"4px",
-      margin: "10px"
+      borderRadius:"10px",
+    //   margin: "10px"
     },
   });
 export default function InventoryTableContent(props){
@@ -70,11 +70,8 @@ export default function InventoryTableContent(props){
     const [orderDirection,setOrderDirection]=React.useState('asc');
     const [valueToOrderBy,setValueToOrderBy]=React.useState('company');
     const [page,setPage]=React.useState(0);
-    const [rowsPerPage,setRowsPerPage]=React.useState(10);
+    const [rowsPerPage,setRowsPerPage]=React.useState(1000);
     const [rowInformation,setRowInformation]=React.useState([])
-    const [open, setOpen] = React.useState(false);
-    const [remove, setRemove] = React.useState(null)
-    const [loading,setLoading]=React.useState(false)
     const handleRequestSort = (event, property) => {
         const isAscending = valueToOrderBy === property && orderDirection === 'asc';
         setValueToOrderBy(property);
@@ -91,41 +88,152 @@ export default function InventoryTableContent(props){
         console.log(responseJSON)
         setRowInformation(responseJSON)
     }
-    const deleterow = async function(id){
-        setLoading(true)
-        try{
-            let response = await apiCall("trade/"+id, 'DELETE') 
-            await getAllInventory()
-            console.log(response) 
-            setOpen(false) 
-            setLoading(false) 
-        }
-        catch(e){
-            console.log(e)
-        }
-        
-    }
-    const DeletePopUp =(id)=>{
-            setOpen(true) 
-            setRemove(id)
-                     
-    } 
+    
+    const [panelShow1, setPanelShow1] = React.useState(false)
+    const [panelShow2, setPanelShow2] = React.useState(false)
+    const [panelShow3, setPanelShow3] = React.useState(false)
+    const [SectorList, setSectorList] = React.useState([])
+    const [SeriesOfFundingList, setSeriesOfFundingList] = React.useState([])
 
-    return( <div style={{display:"flex",justifyContent:"center"}}>
-                
-            <div>
-                <div className="Inventory_Table_title"> <p>Available Listings</p> 
-                {/* <Buttons.SecondaryButton value="Create Inventory" 
-                onClick={()=>{history.push("/create_inventory")}}/>  */}
-                {/* <button className="view_all_button">View all</button> */}
-                {/* <Buttons.SecondaryButton value="Edit Inventory" 
-                onClick={()=>{history.push("/edit_inventory")}} />
-                <Buttons.SecondaryButton value="View All"/> */}
-                </div> 
-               
+    React.useEffect(() => {
+
+        axios.get(`https://api.unlistedassets.com/company/findAll`)
+        .then(res => {
+           const resData = res.data;
+    
+        //   this.setState({ 
+        //     companies:resData,
+        //     companyLenght:res.data.length,
+        //     isLoading:false
+        //    });
+        //    this.getPrice();
+        //    this.setState({
+        //     maxpricerange:this.state.maxprice,
+        //     minpricerange:this.state.minprice
+        //    })
+    
+        }).catch((error) => {
+          console.log(error)
+      });
+
+        axios.get(`https://api.unlistedassets.com/company/sector/findAll`)
+            .then(res => {
+                const resData = res.data;
+                setSectorList(resData);
+            }).catch((error) => {
+                console.log(error)
+            });
+
+            axios.get(`https://api.unlistedassets.com/company/fundingseries/findAll`)
+            .then(res => {
+               const resData = res.data;
+          
+               setSeriesOfFundingList(resData)
+            }
+            ).catch((error) => {
+              console.log(error)
+          });
+    }, []); // <-- Have to pass in [] here!
+
+    let showPanel1 = () => {
+        setPanelShow1(!panelShow1)
+    }
+
+    let showPanel2 = () => {
+        setPanelShow2(!panelShow2)
+    }
+
+    let showPanel3 = () => {
+        setPanelShow3(!panelShow3)
+    }
+
+    let sectorChange = () => {
+
+    }
+
+    let fundingChange = () => {
+
+    }
+
+    let finalChange  = () => {
+
+    }
+
+    let FilterCard = () => {
+
+        let minprice = 10
+        let maxprice = 10000
+        return (
+            <div className="filter-card-container ">
+                <div className="filter-card ">
+                    <div className="sun bg-white">
+                        <div className="moon">
+                            <h5 className="text-primary">
+                                <strong className="text-primary" id="text-primary">Filter</strong> 
+                                <span className="pull-right float-right mt-2">
+                                    <Link to="#"><span className="text-dark"> Clear All</span></Link>
+                                </span>
+                            </h5>
+                        </div>
+                        <div className="earth">
+                            <button className={panelShow1 ? "accor active1" : "accor"} onClick={showPanel1}>Sector</button>
+                            <div className={panelShow1 ? "panel1 show-panel1" : "panel1"} >
+                                {SectorList && SectorList.map((item, index) => {
+                                    return <div className="form-group" key={index}>
+                                        <p className="d-flex align-items-center">  <input type="checkbox" name="sector_value" value={item.value} onChange={sectorChange} /> <span>{item.label}</span></p>
+                                    </div>;
+                                })}
+
+                            </div>
+                            <button className={panelShow2 ? "accor active1" : "accor"} onClick={showPanel2}>Series of Funding</button>
+                            <div className={panelShow2 ? "panel1 show-panel1" : "panel1"}>
+                                {SeriesOfFundingList && SeriesOfFundingList.map((item, index) => {
+                                    return <div className="form-group" key={index}>
+                                        <p className="d-flex align-items-center">  <input type="checkbox" name="company_series_of_funding" value={item.value} onChange={fundingChange} /> <span>{item.label}</span></p>
+                                    </div>;
+                                })}
+                            </div>
+                            <button className={panelShow3 ? "accor active1" : "accor"} onClick={showPanel3}>Valuation</button>
+                            <div className={panelShow3 ? "panel1 show-panel1" : "panel1"}>
+                                {
+                                    minprice && maxprice ? <PriceRangeSlider minVal={minprice} maxVal={maxprice} finalChange={finalChange} /> : null
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        )
+    }
+
+    return( <div className="container-fluid" style={{marginTop:"25px"}}>
+    <div className="my-holdings-page row">
+         
+         <React.Fragment>
+        <div className="col-md-3 col-12">
+         <FilterCard/>
+         </div>
+         <div className="col-md-9 col-12">
+         <div className="table-container">
+
+         <div className="Table_title" > <h6 style={{marginTop:"20px"}}><strong> Inventory </strong></h6> 
+         
+         <div>
+         <Buttons.SecondaryButton value="Add My Holdings" id="add-holdings-button" onClick={()=>{history.push("/addholdings")}}
+         style={{height: "34px",background: "transparent",border: "1px solid #721B65",width:"140px"}}
+         />
+         {/* <Buttons.SecondaryButton value="Add Company Request" 
+         style={{height: "34px",background: "transparent",border: "1px solid #721B65",width:"200px"}}
+         /> */}
+         </div>
+         </div> 
+         
+    <div className="mt-3 myholding-right-sec">
+
            <TableContainer className={classes.container}>
            
-            <Table stickyHeader>
+            <Table stickyHeader style={{backgroundColor:"white"}}>
                 <TableHeader
                 valueToOrderBy={valueToOrderBy}
                 orderDirection={orderDirection}
@@ -138,8 +246,14 @@ export default function InventoryTableContent(props){
                         <TableRow key={index}>
                                                         
                             <TableCell>
-                                {trade.commodityName}
-                                {trade.updateDate}
+                                <div className="company_cell1 d-flex align-items-center justify-content-center">
+                                    <div className="company-logo-img"><img src={trade.companyLogo} width={50} className="product-company-logo"/> </div>
+                                    <div className="company_details1 ml-2">
+                                        <p className="company_name m-0"><b>{trade.companyName}</b></p>
+                                        <p className="Share_type m-0">{trade.commodityName}</p>
+                                        <p className="myHoldings_id m-0">LIST{trade.id}</p>
+                                    </div>
+                                </div>
                             </TableCell>
                             <TableCell>
                                 {trade.qty}
@@ -155,10 +269,47 @@ export default function InventoryTableContent(props){
                                 
                             </TableCell>
                             <TableCell>
+                                {trade.onboardingAccountId}
+
+                            </TableCell>
+
+                            <TableCell>
+                                {trade.id}
+
+                            </TableCell>
+
+                            <TableCell>
                                 {trade.isTradeOwner === false ? 
-                                <h4 style={{cursor:"pointer",color: "#721B65"}}
-                                onClick={()=>{
-                                    history.push({ pathname: "/transactions", state: { selectedTrade: trade } })
+                                <h4 style={{cursor:"pointer",color: "#721B65",fontSize:"14px",fontWeight:"500",textDecorationLine:"underline"}}
+                                onClick={async ()=>{
+
+                                    let response = await apiCall("tradeongoingtranaction/tradeaccount/"+trade.id,'GET')
+                                    let responseJSON = await response.json();
+                                    console.log("hihihihihihko11"+responseJSON)
+
+                                    console.log(response.status+"juju")
+                                    if(response.status != 200) {
+                                        console.log("hihihihihihko")
+                                        const reqBody = {
+                                            "communicationStatus": "donotcreatecoomunicationrecord",
+                                            "message": "it's a dummy comment",
+                                            "offeredPrice": "1",
+                                            "offeredQuantity": "0",
+                                            "tradeId": trade.id
+                                        }
+                                        const response1 = await apiCall("tradecommunication/",'POST',reqBody)
+                                        const responseJSON1 = await response1.json();
+
+                                        const response12 = await apiCall("tradeongoingtranaction/ongoingtransaction/"+responseJSON1.tradeOnGoingTransactionId,'GET')
+                                        const responseJSON12 = await response12.json();
+
+                                        console.log("hihihihihihko113"+responseJSON.tradeId)
+                                        responseJSON = responseJSON12;
+                                        console.log("hihihihihihko14"+responseJSON.tradeId)
+                                    }
+                                    console.log("hihihihihihko15"+responseJSON.tradeId)
+                                    console.log("hihihihihihko15"+responseJSON.companyLogo)
+                                    history.push({ pathname: "/transactions", state: { selectedTrade: trade, selectedongoingtxn: responseJSON } })
                                 }}>
                                 Negotiate</h4>
                                 :<p>You are the Owner</p> }
@@ -171,33 +322,26 @@ export default function InventoryTableContent(props){
             </Table>
             
         </TableContainer>
-            
-        <Dialog
-                                            open={open}
-                                            onClose={() => { setOpen(false) }}
-                                        ><div style={{width:"300px",backgroundColor:"white"}}>
-                                            {loading ? <p style={{paddingLeft:"120px"}}> Loading...</p> :
-                                            <>
-                                            <DialogTitle id="alert-dialog-title">{"Do You Want To Delete?"}</DialogTitle>
-                                            
-                                            <DialogActions>
-                                            <Button  onClick={()=>{deleterow(remove)}} color="primary">
-                                                YES
-                                            </Button>
-                                            <Button onClick={() => { setOpen(false) }} color="primary">
-                                                NO
-                                            </Button>
-                                            
-                                            </DialogActions>
-                                            </>
-                                        }
-                                        </div>
-                                        </Dialog>
-                                      
         </div>
-        
+ 
+         {/* <TablePagination
+             rowsPerPageOptions={[5,10,25,50]}
+             component="div"
+             count={rowInformation.length}
+             rowsPerpage={rowsPerPage}
+             page={page}
+             onChangePage={handleChangePage}
+             onChangeRowsPerPage={handleChangeRowsPerPage}
+         /> */}
+                     </div>    
+                     </div>   
+                     </React.Fragment>
+                
+           
+
+                        
         </div>
-    )
+        </div>     )
     
  
 }

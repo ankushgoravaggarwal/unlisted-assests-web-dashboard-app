@@ -1,6 +1,6 @@
 import React from "react";
 import Select from "react-select";
-import "./style.css";
+import "./style.scoped.css";
 import UploadIcon from "../../../../assets/upload_icon.svg";
 import { apiCall, setAccessToken } from "../../../../Utils/Network";
 import { Link, useHistory, useLocation } from "react-router-dom";
@@ -15,7 +15,7 @@ let InlineValidationBoxExistingHolding = () => {
   return (
     <div className="inline-validation-box">
       <p>
-        Note: Holding already exists for this company’s Share type “ESOP”. You
+        Note: Holding already exists for this company’s Share type. You
         can continue to create a “New Holding” for another share type or add
         edit your existing holding.
       </p>

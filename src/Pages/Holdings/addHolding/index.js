@@ -5,8 +5,8 @@ import VideoPreviewAddholding from "../../../assets/video_preview_addholding.png
 
 function AddHoldings() {
   return (
-    <div style={{display:"flex",flexDirection:"column",
-    justifyContent:"center",alignItems:"center",marginTop:"10px"}}>
+    <div className="addholding_container">
+      <div>
       <div className="addholding_container-inner">
         <div className="addholding_right">
           <div className="addholding_form-container">
@@ -14,10 +14,11 @@ function AddHoldings() {
           </div>
         </div>
         <div className="addholding_left">
-          <div className="addholding_left-inner">
+           <div>
             <img src={VideoPreviewAddholding} />
+            </div>
             <div>
-              <p>Holding</p>
+              <p><b>Holding</b></p>
               <p>
                 Lorem Ipsum is simply dummy text of the printing and typesetting
                 industry. Lorem Ipsum has been the industry's standard dummy
@@ -26,7 +27,8 @@ function AddHoldings() {
               </p>
             </div>
           </div>
-        </div>
+        
+      </div>
       </div>
     </div>
   );

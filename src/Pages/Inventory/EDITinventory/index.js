@@ -1,6 +1,6 @@
 import React from "react";
 import AddHoldingForm from "./editInventoryForm";
-import "./style.css";
+import "./style.scoped.css";
 import VideoPreviewAddholding from "../../../assets/video_preview_addholding.png";
 import EditInventoryForm from "./editInventoryForm";
 

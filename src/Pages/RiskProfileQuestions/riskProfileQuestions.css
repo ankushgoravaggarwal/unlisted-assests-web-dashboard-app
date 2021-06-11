@@ -1,5 +1,9 @@
 .unlisted-assests-logo-header{
-    width: 100%;
+    margin-top: 5px;
+    margin-left: 32px;
+    margin-bottom: 0px;
+    width: 200px;
+    height: 42px;
 }
 
 .horizontal-line {
@@ -15,6 +19,10 @@
 
 .main-content-container {
     display: flex;
+}
+
+.main-content {
+    /* margin-left: 100px; */
 }
 
 .title-card {

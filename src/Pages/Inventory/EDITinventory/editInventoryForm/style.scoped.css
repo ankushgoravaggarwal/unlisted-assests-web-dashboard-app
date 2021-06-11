@@ -28,7 +28,8 @@
 }
 
 .editinventory-form_field {
-  margin-top: 5px;
+  margin-top: 15px;
+  
 }
 
 .editinventory-form_field > div {
@@ -46,7 +47,7 @@
 
 .editinventory-form_field-2 {
   display: flex;
-  flex-direction: row;
+  
 }
 
 .editinventory-form_field-2 > div {
@@ -63,6 +64,7 @@
   border: 1px solid #cfcbcf;
   border-radius: 4px;
   padding: 10px;
+  background-color: #FAFAFF;
 }
 
 .editinventory-form_button_container > button {
@@ -88,6 +90,8 @@
   padding: 5px 10px;
   justify-content: center;
   margin-top: 10px;
+  background-color: #FAFAFF;
+  font-size: 14px;
 }
 
 .editinventory-form_upload-photo > p {
@@ -98,11 +102,12 @@
 .editinventory-form_note {
   display: flex;
   flex-direction: ;
-  background: #2e384d;
-  color: #fff;
+  background: #2E384D;
+  color: #FFFFFF;
   padding: 5px 10px;
   margin-top: 5px;
-  border-radius: 4px;
+  border-radius: 6px;
+  font-size: 12px;
 }
 
 .editinventory-form_field-select {
@@ -135,4 +140,55 @@ input {
   margin: 15px; /* it shows all four sides 15px space */
   background-color: white;
   cursor: pointer;
+}
+.AddListing_Disclaimer{
+font-size: 14px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+color: #000000;
+
+
+}
+.AddListing_Disclaimer_checkBox{
+width: 36.6px;
+height: 36px;
+margin:10px ;
+}
+.addlist-title{
+  margin-top: 20px;
+}
+.addlist-title h4 {
+  font-size: 18px !important;
+  margin: 0;
+  letter-spacing: 1px;
+  font-family: 'Montserrat';
+  font-weight: 600 !important;
+}
+.addlist-title hr {
+  border: 1px solid #721c65 !important;
+  width: 10% !important;
+  float: left;
+  margin: 0 !important;
+}
+.listing-img{
+  width: 50px;
+  height: 50px;
+  margin: 0px 10px;
+  border: 1px solid #d0cdd0;
+  border-radius: 50%;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.listing-img img {
+  width: 30px;
+  height: 30px;
+}
+@media(max-width: 768px){
+  .editinventory-form_field-2 {
+    display: flex;
+    flex-direction: column; 
+  }
 }

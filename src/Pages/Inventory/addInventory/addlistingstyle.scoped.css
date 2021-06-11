@@ -24,7 +24,21 @@
 .addholding_right {
   width: 70%;
 }
+.addholding-form_field > div {
+  margin-top: 10px;
+}
 
+.addholding-form_field > div > label {
+  margin-bottom: 5px;
+  
+  font-size: 14px;
+}
+
+.addholding-form_field > div > input {
+  height: 100%;
+  border: 1px solid #CFCBCF;
+  border-radius: 4px;
+}
 .addholding_form-container {
   width: 100%;
 }

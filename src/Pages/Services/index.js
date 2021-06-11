@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Loan from "./assets/loan.svg"
 import Valuation from "./assets/valuation.svg"
-import Broker from "./assets/broker.svg"
+import Broker from "../../assets/broker.svg"
 import "./service.scoped.css"
 
 import ValuationForTheShares from "./valuationfortheshares";

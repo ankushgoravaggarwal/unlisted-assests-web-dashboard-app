@@ -32,7 +32,7 @@ const TableArrowfunction =()=>{
                     direction={valueToOrderBy === "Seller Name" ? orderDirection : 'asc'}
                     onClick={createSortHandler("Seller Name")}
                 >
-                          Seller Name
+                          Company Name
                 </TableSortLabel>   
         </TableCell>
 
@@ -90,7 +90,31 @@ const TableArrowfunction =()=>{
             </TableSortLabel>
           </TableCell>
 
-          
+          <TableCell key="accountId">
+              <TableSortLabel
+                  className="Trade_Header_Name"
+                  style={{fontWeight: "500",fontSize: "14px",color: "#721B65"}}
+                  IconComponent={TableArrowfunction}
+                  active={valueToOrderBy === "accountId"}
+                  direction={valueToOrderBy === "accountId" ? orderDirection : 'asc'}
+                  onClick={createSortHandler("accountId")}
+              >
+                  Listing Owner
+              </TableSortLabel>
+          </TableCell>
+
+          <TableCell key="tradeId">
+              <TableSortLabel
+                  className="Trade_Header_Name"
+                  style={{fontWeight: "500",fontSize: "14px",color: "#721B65"}}
+                  IconComponent={TableArrowfunction}
+                  active={valueToOrderBy === "tradeId"}
+                  direction={valueToOrderBy === "tradeId" ? orderDirection : 'asc'}
+                  onClick={createSortHandler("tradeId")}
+              >
+                  Trade Id
+              </TableSortLabel>
+          </TableCell>
 
           <TableCell key="action">
               <TableSortLabel

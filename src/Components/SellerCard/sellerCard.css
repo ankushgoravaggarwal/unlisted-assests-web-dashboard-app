@@ -102,12 +102,24 @@ color: #2E384D;
         background-color: #CFCBCF;
         width: 40%;
     }
+    .seller_card_first_row p {
+        font-size: 14px !important;
+        font-weight: 600;
+    }
     @media only screen and (max-width: 678px) {
         .sellercard {
             padding: 0px 0px !important;
         }
+        .seller-card {
+            width: 100%;
+        }
         .accept-tost-msg p {
             font-size: 13px;
             margin-left: 0px;
+        }
+        .seller_card_first_row p {
+            margin-left: 10px !important;
+            font-size: 14px !important;
+            font-weight: 600;
         }
       }

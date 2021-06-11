@@ -1,5 +1,5 @@
 
-const BASE_URL = "https://api1.unlistedassets.com/"
+const BASE_URL = "http://api1.unlistedassets.com/"
 var ACCESS_TOKEN = window.sessionStorage.getItem("ACCESS_TOKEN")
 
 let basicAuth = {username: "mobile", password: "abc"}

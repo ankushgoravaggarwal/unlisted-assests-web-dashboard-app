@@ -48,49 +48,14 @@ const useStyles = makeStyles((theme)=>({
 }))
 
 let BuyerSendToVA =()=>{
-    const classes = useStyles()
     
-    const [accountnumber,setAccountNumber]=React.useState('')
-    const [ifsc,setIfsc]=React.useState('')
-    const [bankname,setBankName]=React.useState('')
-    const [branchname,setBranchName]=React.useState('')
-    const [virtualBankDetails,setVirtualbankdetails]=React.useState({})
-    React.useEffect(()=>{
-        virtualbankdetails()
-    },[])
-    const virtualbankdetails = async function (){
-        const response = await apiCall("useronboarding/bankdetail/true",'GET')
-        const responseJSON = await response.json()
-        setVirtualbankdetails(responseJSON)
-        setAccountNumber(responseJSON.accountNumber)
-        setIfsc(responseJSON.ifscCode)
-        setBankName(responseJSON.bankName)
-        setBranchName(responseJSON.branchName)
-    }
-
-    
+    const [bankTransfer,setBankTransfer] = React.useState('')
+    const [paypal,setpaypal] = React.useState('')
+    const [debitCard,setDebitcard] = React.useState('')
+    const [masterCard,setMasterCard] = React.useState('')
     const saveContinue = async function () {
-        // let response = await fetch('getholding').toJson()
-        // setRowInformation(response)
-        let requestBody = {
-            "accountNumber": accountnumber,
-            "ifscCode": ifsc,
-            "bankName": bankname,
-            "branchName": branchname,
-            "uaVerifiedStatus": "string",
-            "uaVerifiedRemarks": "string",
-            "isVirtualAccount": true
-          }
-       
-        let response = await apiCall("useronboarding/bankdetail", 'POST', requestBody)
         
-        console.log("api called ",response)
-
-        let responseJSON = await response.json()
-        
-        console.log("responseJson", responseJSON)
-
-        successToast("Success", "Virtual Account Updated Successfully");
+        successToast("Success", "Payment processed Successfully");
 
         
     }
@@ -110,10 +75,10 @@ let BuyerSendToVA =()=>{
             
             <div style={{display:"flex",flexDirection:"column",paddingTop:"10px",lineHeight:"60px"}}>
                 
-            <div className="buyersendalignitems"><input type="radio" className="buyer_radio_input"/><label className="buyerradiomarginleft">Bank Transfer</label></div>
-            <div className="buyersendradio"><div className="buyersendalignitems"><input type="radio" className="buyer_radio_input"/><label className="buyerradiomarginleft">Paypal</label></div><div><label>34567@gmail.com</label></div></div>
-            <div className="buyersendradio"><div className="buyersendalignitems"><input type="radio" className="buyer_radio_input"/><label className="buyerradiomarginleft">Visa Debit card</label></div><div><label>34567@gmail.com</label></div></div>
-            <div className="buyersendalignitems"><input type="radio" className="buyer_radio_input"/><label className="buyerradiomarginleft">Master card</label></div>
+            <div className="buyersendalignitems"><input type="radio" className="buyer_radio_input" value={bankTransfer}/><label className="buyerradiomarginleft">Bank Transfer</label></div>
+            <div className="buyersendradio"><div className="buyersendalignitems"><input type="radio" className="buyer_radio_input" value={paypal}/><label className="buyerradiomarginleft">Paypal</label></div><div><label>34567@gmail.com</label></div></div>
+            <div className="buyersendradio"><div className="buyersendalignitems"><input type="radio" className="buyer_radio_input" value={debitCard}/><label className="buyerradiomarginleft">Visa Debit card</label></div><div><label>34567@gmail.com</label></div></div>
+            <div className="buyersendalignitems"><input type="radio" className="buyer_radio_input"/><label className="buyerradiomarginleft" value={masterCard}>Master card</label></div>
             
             </div>                   
             
@@ -137,7 +102,7 @@ let BuyerSendToVA =()=>{
                 <div style={{display:"flex",justifyContent:"space-between",paddingLeft:"30px",paddingRight:"30px"}}> 
                     <Buttons.SecondaryButton value="Withdraw Balance" style={{width:"200px"}}/>    
                     <Buttons.PrimaryButton value="Continue to pay"
-                    disabled={!(bankname && accountnumber  && branchname && ifsc)}
+                    // disabled={!(bankname && accountnumber  && branchname && ifsc)}
                     onClick={saveContinue}
                     />
                 </div>

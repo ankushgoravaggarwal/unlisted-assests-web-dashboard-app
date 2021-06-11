@@ -1,6 +1,6 @@
 import React from "react";
 import AddInventoryForm from "./addInventoryForm";
-import "./style.css";
+import "./addlistingstyle.scoped.css";
 import VideoPreviewAddholding from "../../../assets/video_preview_addholding.png";
 import VideoPlay from "../../../assets/play.png";
 
@@ -17,11 +17,11 @@ function AddHoldings() {
             <AddInventoryForm />
           </div>
         </div>
-        <div className="col-md-6 col-12"> 
-          <div className="addholding_left-inner">
+        <div className="col-md-6 col-12"  > 
+          <div className="addholding_left-inner" >
             <div className="play-video">
-              <img className="video-img w-100"  src={VideoPreviewAddholding} />
-              <img className="play-icon" src={VideoPlay} />
+              <img className="video-img"  src={VideoPreviewAddholding} />
+              {/* <img className="play-icon " src={VideoPlay} /> */}
             </div>
             <div className="mt-3 holding-desc">
               <h6><strong>Listing</strong></h6>

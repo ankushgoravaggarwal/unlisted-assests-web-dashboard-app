@@ -10,7 +10,7 @@ import TableSortLabel from '@material-ui/core/TableSortLabel';
 import OngoingTransactionTableHeader from './ongoingtransactiontableheader';
 import { makeStyles,withStyles } from '@material-ui/core/styles';
 import SunPharma from "./sun_pharma.svg";
-import "./myholdingstablecontent.css"
+import "./ongoingtablecontent.scoped.css"
 import Buttons from "../../Components/Buttons"
 import axios from 'axios'
 import ToogleButton from '../../Components/ToogleButton/toogleswitch';
@@ -27,11 +27,9 @@ import Modal from '@material-ui/core/Modal';
 import EmptyHoldings from "../Holdings/index"
 import edit from "./edit.png";
 import deleteicon from "./delete.png"
-import "../../Components/FilterCard/filterCard.css"
 import '../Companies/bootstrap4/css/bootstrap.scoped.css';
-
+import "../../Components/FilterCard/filterCard.css"
 import "../Companies/style.scoped.css"
-
 import PriceRangeSlider from '../Companies/PriceRangeSlider';
 
 
@@ -42,7 +40,7 @@ import {
     Switch,
     Route,
     Link,useHistory,useLocation
-  } from "react-router-dom";
+} from "react-router-dom";
 
 function descendingComparator(a,b, orderBy){
     if(b[orderBy] < a[orderBy]){
@@ -54,9 +52,9 @@ function descendingComparator(a,b, orderBy){
     return 0
 }
 function getComparator(order, orderBy){
-    return order === "desc" 
-    ? (a,b) => descendingComparator(a,b, orderBy) 
-    : (a,b) => -descendingComparator(a,b, orderBy)
+    return order === "desc"
+        ? (a,b) => descendingComparator(a,b, orderBy)
+        : (a,b) => -descendingComparator(a,b, orderBy)
 }
 const sortedRowInformation = (rowArray, comparator) => {
     const stabilizedRowArray = rowArray.map((el,index) => [el,index])
@@ -68,69 +66,70 @@ const sortedRowInformation = (rowArray, comparator) => {
     return stabilizedRowArray.map((el)=> el[0])
 }
 
-  function rand() {
+function rand() {
     return Math.round(Math.random() * 20) - 10;
-  }
-  
-  function getModalStyle() {
+}
+
+function getModalStyle() {
     const top = 50 + rand();
     const left = 50 + rand();
-  
+
     return {
-      top: `${top}%`,
-      left: `${left}%`,
-      transform: `translate(-${top}%, -${left}%)`,
+        top: `${top}%`,
+        left: `${left}%`,
+        transform: `translate(-${top}%, -${left}%)`,
     };
-  }
-  
-  const useStyles = makeStyles((theme) => ({
+}
+
+const useStyles = makeStyles((theme) => ({
     root: {
         width: '100%',
-      },
-      container: {
+    },
+    container: {
         maxHeight: 600,
+        width: "border-box",
         border:"0.5px solid #E5E5E5",
         borderRadius:"4px",
-      },
-    paper: {
-      position: 'absolute',
-      width: 400,
-      backgroundColor: theme.palette.background.paper,
-      border: '1px dashed #CFCBCF',
-      boxShadow: theme.shadows[5],
-      padding: theme.spacing(2, 4, 3),
     },
-    
-  }));
-  const StyledButton = withStyles({
+    paper: {
+        position: 'absolute',
+        width: 400,
+        backgroundColor: theme.palette.background.paper,
+        border: '1px dashed #CFCBCF',
+        boxShadow: theme.shadows[5],
+        padding: theme.spacing(2, 4, 3),
+    },
+
+}));
+const StyledButton = withStyles({
     root: {
-      background: '#ED2939',
-      borderRadius: 3,
-      border: 0,
-      color: 'white',
-      height: 48,
-      padding: '0 30px',
-      boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+        background: '#ED2939',
+        borderRadius: 3,
+        border: 0,
+        color: 'white',
+        height: 48,
+        padding: '0 30px',
+        boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
     },
     label: {
-      textTransform: 'capitalize',
+        textTransform: 'capitalize',
     },
-  })(Button);
+})(Button);
 
 export default function OngoingTransactionTableContent(props){
     let history = useHistory();
-    
+
     const [rowInformation, setRowInformation] = React.useState([])
     const [allinventory,setAllinventory] = React.useState([]);
     const [transactioinformation,setTransactioninformation] = React.useState([])
     const [isShown, setIsShown] = React.useState(false);
-    
+
     React.useEffect(() => {
         getData();
         getAllInventory();
-        
-      }, []); // <-- Have to pass in [] here!
-      
+
+    }, []); // <-- Have to pass in [] here!
+
     const getAllInventory = async function (){
         let allinventoryresponse = await apiCall("trade/findAll",'GET')
         console.log(allinventoryresponse)
@@ -141,19 +140,19 @@ export default function OngoingTransactionTableContent(props){
     const getData = async function () {
         // let response = await fetch('getholding').toJson()
         // setRowInformation(response)
-       
+
         let response = await apiCall("tradeongoingtranaction/tradeaccount",'GET')
         // let transactionresponse = await apiCall("tradeongoingtranaction/tradeaccount",'GET')
-        
-            // setRowInformation(response)
-        
+
+        // setRowInformation(response)
+
         // let responseJSON = await response.json()
-        
+
         console.log("api called ",response)
 
         let responseJSON = await response.json()
         //let transactionresponseJSON = await transactionresponse.json()
-        
+
         console.log("responseJson", responseJSON)
         setRowInformation(responseJSON);
         // setRowInformation(responseJSON.map((item, idx) => {
@@ -161,32 +160,30 @@ export default function OngoingTransactionTableContent(props){
         //     return item
         //     }))
         console.log(rowInformation)
-       // setTransactioninformation(transactionresponseJSON)
-        
+        // setTransactioninformation(transactionresponseJSON)
 
-        
     }
-    
+
     const deleterow = async function(id){
         setLoading(true)
         try{
-            let response = await apiCall(`myholding/${id}`, 'DELETE') 
+            let response = await apiCall(`myholding/${id}`, 'DELETE')
             await getData()
-            console.log(response) 
-            setOpen(false) 
-            setLoading(false) 
+            console.log(response)
+            setOpen(false)
+            setLoading(false)
         }
         catch(e){
             console.log(e)
         }
-        
+
     }
     const DeletePopUp =(id)=>{
-            setOpen(true) 
-            setRemove(id)
-                     
-    } 
-    
+        setOpen(true)
+        setRemove(id)
+
+    }
+
 
     const classes = useStyles();
     const [orderDirection,setOrderDirection]=React.useState('asc');
@@ -197,7 +194,7 @@ export default function OngoingTransactionTableContent(props){
         const isAscending = valueToOrderBy === property && orderDirection === 'asc';
         setValueToOrderBy(property);
         setOrderDirection(isAscending ? 'desc' : 'asc');
-        
+
     }
 
     // [
@@ -210,14 +207,14 @@ export default function OngoingTransactionTableContent(props){
     //     {"company":"Saturn Pharma","qty":38,"sharetype":"Dinesh","price":51,"amount":105,"date":"20 nov 2020","verified": "No","availableforsell": "Yes","action":"Edit"},
     //     {"company":"Pluto Pharma","qty":39,"sharetype":"Aajith","price":67,"amount":180,"date":"23 Oct 2021","verified": "Yes","availableforsell": "Yes","action":"Delete"},
     // ]
-    const [addHoldings,setAddHoldings]=React.useState(false); 
+    const [addHoldings,setAddHoldings]=React.useState(false);
     const [open, setOpen] = React.useState(false);
     const [remove, setRemove] = React.useState(null)
     const [loading,setLoading]=React.useState(false)
     const [modalStyle] = React.useState(getModalStyle);
     const [listing, setListing]=React.useState(1)
-    
-    
+
+
 
     const showAddorEditListing =(holding)=>{
         if (holding.qtysale === 0){
@@ -226,16 +223,16 @@ export default function OngoingTransactionTableContent(props){
     }
     const body = (
         <div style={modalStyle} className={classes.paper} style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
-          <div>
-               
-                <p style={{paddingLeft:"35px"}}>Loading</p>  
-    
-        </div>
-        </div>
-        
-      );
+            <div>
 
-    
+                <p style={{paddingLeft:"35px"}}>Loading</p>
+
+            </div>
+        </div>
+
+    );
+
+
 
 
     const [panelShow1, setPanelShow1] = React.useState(false)
@@ -249,47 +246,47 @@ export default function OngoingTransactionTableContent(props){
     React.useEffect(() => {
 
         axios.get(`https://api.unlistedassets.com/company/findAll`)
-        .then(res => {
-           const resData = res.data;
-    
-        //   this.setState({ 
-        //     companies:resData,
-        //     companyLenght:res.data.length,
-        //     isLoading:false
-        //    });
-        //    this.getPrice();
-        //    this.setState({
-        //     maxpricerange:this.state.maxprice,
-        //     minpricerange:this.state.minprice
-        //    })
-    
-        }).catch((error) => {
-          console.log(error)
-      });
+            .then(res => {
+                const resData = res.data;
+
+                //   this.setState({
+                //     companies:resData,
+                //     companyLenght:res.data.length,
+                //     isLoading:false
+                //    });
+                //    this.getPrice();
+                //    this.setState({
+                //     maxpricerange:this.state.maxprice,
+                //     minpricerange:this.state.minprice
+                //    })
+
+            }).catch((error) => {
+            console.log(error)
+        });
 
         axios.get(`https://api.unlistedassets.com/company/sector/findAll`)
             .then(res => {
                 const resData = res.data;
                 setSectorList(resData);
             }).catch((error) => {
-                console.log(error)
-            });
+            console.log(error)
+        });
 
-            axios.get(`https://api.unlistedassets.com/company/fundingseries/findAll`)
+        axios.get(`https://api.unlistedassets.com/company/fundingseries/findAll`)
             .then(res => {
-               const resData = res.data;
-          
-               setSeriesOfFundingList(resData)
-            }
+                    const resData = res.data;
+
+                    setSeriesOfFundingList(resData)
+                }
             ).catch((error) => {
-              console.log(error)
-          });
+            console.log(error)
+        });
     }, []); // <-- Have to pass in [] here!
 
- 
-        
 
-        
+
+
+
 
 
     let showPanel1 = () => {
@@ -321,28 +318,32 @@ export default function OngoingTransactionTableContent(props){
         let minprice = 10
         let maxprice = 10000
         return (
-            <div className="filter-card-container">
-                <div className="filter-card">
-                    <div className="sun">
+            <div className="filter-card-container ">
+                <div className="filter-card ">
+                    <div className="sun bg-white">
                         <div className="moon">
-                            <h4>Filter<span className="pull-right"><Link to="#">Clear All</Link></span></h4>
+                            <h5 className="text-primary">
+                                <strong className="text-primary" id="text-primary">Filter</strong> 
+                                <span className="pull-right float-right mt-2">
+                                    <Link to="#"><span className="text-dark"> Clear All</span></Link>
+                                </span>
+                            </h5>
                         </div>
                         <div className="earth">
                             <button className={panelShow1 ? "accor active1" : "accor"} onClick={showPanel1}>Sector</button>
                             <div className={panelShow1 ? "panel1 show-panel1" : "panel1"} >
                                 {SectorList && SectorList.map((item, index) => {
                                     return <div className="form-group" key={index}>
-                                        <p>  <input type="checkbox" name="sector_value" value={item.value} onChange={sectorChange} /> <span>{item.label}</span></p>
+                                        <p className="d-flex align-items-center">  <input type="checkbox" name="sector_value" value={item.value} onChange={sectorChange} /> <span>{item.label}</span></p>
                                     </div>;
                                 })}
-
 
                             </div>
                             <button className={panelShow2 ? "accor active1" : "accor"} onClick={showPanel2}>Series of Funding</button>
                             <div className={panelShow2 ? "panel1 show-panel1" : "panel1"}>
                                 {SeriesOfFundingList && SeriesOfFundingList.map((item, index) => {
                                     return <div className="form-group" key={index}>
-                                        <p>  <input type="checkbox" name="company_series_of_funding" value={item.value} onChange={fundingChange} /> <span>{item.label}</span></p>
+                                        <p className="d-flex align-items-center">  <input type="checkbox" name="company_series_of_funding" value={item.value} onChange={fundingChange} /> <span>{item.label}</span></p>
                                     </div>;
                                 })}
                             </div>
@@ -359,90 +360,107 @@ export default function OngoingTransactionTableContent(props){
             </div>
         )
     }
-      
+
     return(
-                
-            <div className="my-holdings-page">
-                {rowInformation.length === 0 ? <EmptyHoldings/> : 
-                 <React.Fragment>
-                 <FilterCard/>
- 
-                 <div className="table-container">
- 
-                 <div className="Table_title"> <h2>  Ongoing Transactions</h2> 
-                 {/* <button className="view_all_button">View all</button> */}
-                
-                 {/* <button onClick={()=>setAddHoldings(true)}>Add Holdings</button> */}
-                 {/* <Buttons.SecondaryButton value="Add Holdings" onClick={()=>setAddHoldings(true)}/> */}
-                 <Buttons.SecondaryButton value="Add Holdings" id="add-holdings-button" onClick={()=>{history.push("/addholdings")}}/>
-                 
-                {/* {addHoldings} */}
-                 </div> 
-                 { addHoldings ? null :
- 
-            <TableContainer className={classes.container}>
+        <div className="container-fluid" style={{marginTop:"25px"}}>
+        <div className="my-holdings-page row">
             
-             <Table stickyHeader>
-                 <OngoingTransactionTableHeader
-                 valueToOrderBy={valueToOrderBy}
-                 orderDirection={orderDirection}
-                 handleRequestSort={handleRequestSort}
-                 />
-                 {
-                     sortedRowInformation(rowInformation,getComparator(orderDirection,valueToOrderBy))
-                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                     .map((holding,index) => (
-                         <TableRow key={index}>
-                             <TableCell>
-                             <div className="company_cell">
-                                 <div ><img src={holding.companyLogo} className="product-company-logo"/> </div>
-                                 <div className="company_details ">
-                                 <p className="company_name">{holding.companyName}</p>
-                                 <p className="Share_type ">{holding.commodityName}</p>
-                                 <p className="myHoldings_id">HOLD{holding.companyId}</p>
-                                 </div>
-                             </div>
-                             </TableCell>
-                             
-                             
-                             
-                             <TableCell>
-                                 {holding.tradeId}
-                             </TableCell>
-                             <TableCell>
-                             {holding.action}
-                             </TableCell>
-                             <TableCell>
-                             {holding.qtyUnderNegotiation}
-                             </TableCell>
-                             <TableCell>
-                             {holding.priceUnderNegotiation}    
-                             </TableCell>
-                             <TableCell>
-                             {holding.updateDate}
-                             </TableCell>
-                             <TableCell 
-                             onMouseEnter={() => setIsShown(true)}
-                             onMouseLeave={() => setIsShown(false)}
-                             >
+                <React.Fragment>
+                <div className="col-md-2 col-12 pr-1 pl-1">
+                 <FilterCard/>
+                 </div>
+                 <div className="col-md-10 col-12 pr-1 pl-1">
+                    <div className="table-container">
+                        <div className="Table_title"> <h6 style={{marginTop:"20px"}}><strong>Ongoing Transactions </strong></h6>
+                            {/* <button className="view_all_button">View all</button> */}
+
+                            {/* <button onClick={()=>setAddHoldings(true)}>Add Holdings</button> */}
+                            {/* <Buttons.SecondaryButton value="Add Holdings" onClick={()=>setAddHoldings(true)}/> */}
+                            <Buttons.SecondaryButton value="Add Holdings" id="add-holdings-button" onClick={()=>{history.push("/addholdings")}} style={{height:"40px"}}/>
+
+                            {/* {addHoldings} */}
+                        </div>
+                        { addHoldings ? null :
+                            <div className="mt-3 myholding-right-sec ongoing-transaction-table-section">
+                            <TableContainer className={classes.container}>
+
+                                <Table stickyHeader style={{backgroundColor:"white",fontSize:"16px"}}>
+                                    <OngoingTransactionTableHeader
+                                        valueToOrderBy={valueToOrderBy}
+                                        orderDirection={orderDirection}
+                                        handleRequestSort={handleRequestSort}
+                                    />
+                                    {
+                                        sortedRowInformation(rowInformation,getComparator(orderDirection,valueToOrderBy))
+                                            .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                                            .map((holding,index) => (
+                                                <TableRow key={index}>
+                                                    <TableCell>
+                                                    <div className="company_cell1 d-flex align-items-center justify-content-center">
+                                                        <div className="company-logo-img"><img src={holding.companyLogo} className="product-company-logo"/> </div>
+                                                        <div className="company_details1 ml-2">
+                                                        <p className="company_name m-0"><b>{holding.companyName}</b></p>
+                                                        <p className="Share_type m-0">{holding.commodityName}</p>
+                                                        <p className="myHoldings_id m-0">TXN{holding.id}</p>
+                                                        </div>
+                                                    </div>
+                                                    </TableCell>
+
+
+
+                                                    {/*<TableCell>*/}
+                                                    {/*    {holding.tradeId}*/}
+                                                    {/*</TableCell>*/}
+                                                    <TableCell>
+                                                        {holding.action}
+                                                    </TableCell>
+                                                    <TableCell>
+                                                        {holding.qtyUnderNegotiation}
+                                                    </TableCell>
+                                                    <TableCell>
+                                                        {holding.priceUnderNegotiation}
+                                                    </TableCell>
+                                                    <TableCell>
+                                                        {holding.updateDate}
+                                                    </TableCell>
+                                                    <TableCell>
+                                                        {holding.onboardingTradeOwnerId}
+                                                    </TableCell>
+                                                    <TableCell>
+                                                        {holding.onboardingTradeNONOwnerId}
+                                                    </TableCell>
+                                                    <TableCell>
+                                                        {holding.tradeId}
+                                                    </TableCell>
+                                                    <TableCell
+                                                        onMouseEnter={() => setIsShown(true)}
+                                                        onMouseLeave={() => setIsShown(false)}
+                                                    >
                                  <span>
-                             {isShown === true && holding.ongoingTransactionStatus === "inprogress" ? 
-                             <Buttons.PrimaryButton value="See Details"
-                            
-                             onClick={()=>{
-                                history.push({ pathname: "/transactions", state: { selectedTrade: allinventory[index]} })
-                            }}
-                             />:
-                             holding.ongoingTransactionStatus}</span>
-                             </TableCell>
-                         </TableRow>
-                     ))
-                 }
-                 
-             </Table>
-         </TableContainer>
- }
-         {/* <TablePagination
+                             {isShown === true && holding.ongoingTransactionStatus === "inprogress" ?
+                                 <Buttons.PrimaryButton value="See Details" style={{height:"40px",width:"70px",margin:"0px",fontSize:"10px"}}
+
+                                                        onClick={()=>{
+                                                            for(let i=0; i<allinventory.length;i++) {
+
+                                                                if(holding.tradeId == allinventory[i].id
+                                                                    && holding.onboardingTradeOwnerId == allinventory[i].onboardingAccountId) {
+                                                                    history.push({ pathname: "/transactions", state: { selectedTrade: allinventory[i], selectedongoingtxn: holding} })
+                                                                }
+                                                            }
+                                                        }}
+                                 />:
+                                 holding.ongoingTransactionStatus}</span>
+                                                    </TableCell>
+                                                </TableRow>
+                                            ))
+                                    }
+
+                                </Table>
+                            </TableContainer>
+                            </div>
+                        }
+                        {/* <TablePagination
              rowsPerPageOptions={[5,10,25,50]}
              component="div"
              count={rowInformation.length}
@@ -451,37 +469,38 @@ export default function OngoingTransactionTableContent(props){
              onChangePage={handleChangePage}
              onChangeRowsPerPage={handleChangeRowsPerPage}
          /> */}
-                                     <Dialog
-                                             open={open}
-                                             onClose={() => { setOpen(false) }}
-                                         ><div style={{width:"300px",backgroundColor:"white"}}>
-                                             {loading ? <p style={{paddingLeft:"120px"}}> Loading...</p> :
-                                             <>
-                                             <DialogTitle id="alert-dialog-title">{"Do You Want To Delete?"}</DialogTitle>
-                                             
-                                             <DialogActions>
-                                             <Button  onClick={()=>{deleterow(remove)}} color="primary">
-                                                 YES
-                                             </Button>
-                                             <Button onClick={() => { setOpen(false) }} color="primary">
-                                                 NO
-                                             </Button>
-                                             
-                                             </DialogActions>
-                                             </>
-                                         }
-                                         </div>
-                                         </Dialog>
- 
-                     </div>       
-                     </React.Fragment>
-                
-            }
+                        <Dialog
+                            open={open}
+                            onClose={() => { setOpen(false) }}
+                        ><div style={{width:"300px",backgroundColor:"white"}}>
+                            {loading ? <p style={{paddingLeft:"120px"}}> Loading...</p> :
+                                <>
+                                    <DialogTitle id="alert-dialog-title">{"Do You Want To Delete?"}</DialogTitle>
 
-                        
+                                    <DialogActions>
+                                        <Button  onClick={()=>{deleterow(remove)}} color="primary">
+                                            YES
+                                        </Button>
+                                        <Button onClick={() => { setOpen(false) }} color="primary">
+                                            NO
+                                        </Button>
+
+                                    </DialogActions>
+                                </>
+                            }
+                        </div>
+                        </Dialog>
+
+                    </div>
+                    </div>
+                </React.Fragment>
+
+            
+
+       
         </div>
-        
+        </div>
     )
-    
- 
+
+
 }

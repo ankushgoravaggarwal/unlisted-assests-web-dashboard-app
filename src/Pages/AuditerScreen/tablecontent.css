@@ -10,7 +10,6 @@
 }
 .company_name{
     margin: 0%;
-    font-weight: 600;
 }
 .category_category{
     margin: 0%;
@@ -23,8 +22,7 @@
     width: 100%;
     justify-content: space-between;
 }
-.myholding-right-sec{
-    background: #fff;
-    border: 1px solid #cfcbcf;
-    border-radius: 10px;
+.Table_viewall{
+    
+
 }

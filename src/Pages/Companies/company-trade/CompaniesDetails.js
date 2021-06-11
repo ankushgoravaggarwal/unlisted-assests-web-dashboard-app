@@ -27,8 +27,8 @@ render(){
   const { showMore } = this.state;
 	return(
 		<>
-             <section className="company-section">
-        <div className="container">
+      <section className="company-section">
+        <div className="container-fluid">
           <div className="row">
             <div className="col-md-12 p0">
               <div className="top">

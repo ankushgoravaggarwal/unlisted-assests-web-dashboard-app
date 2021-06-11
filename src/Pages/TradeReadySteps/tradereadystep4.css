@@ -18,7 +18,7 @@
     color: #2E384D;
 }
 .Trade_ready_step_4_Choose_radio_border{
-    width: 596px;
+    
     height: 40px;
     border: 1px solid #CFCBCF;
     /* box-sizing: border-box; */
@@ -28,27 +28,32 @@
 
 .Trade_ready_step_4_bank_image_area{
     width: 187.23px;
-    height: 134px;
+    
     background: url(https://www.google.co.in/);
     border-radius: 10px;
     padding-bottom: 40px;
 }
 .Trade_ready_step_4_bank_image_container{
-    width: 610px;
-    height: 458px;
+    
     border: 1px solid #CFCBCF;
-    box-sizing: border-box;
+    height: fit-content;
     filter: drop-shadow(0px 5px 50px #E5E9F3);
     border-radius: 22px;
-    padding: 80px;
+    padding: 20px;
 
 }
 .Trade_ready_step_4_save_button{
     display: flex;
-    width: 550px;
+    
     margin-top: 30px;
     padding-left: 70px;
     border-top: 1px solid #CFCBCF;
     padding-top: 20px;
     justify-content: flex-end;
+}
+@media(max-width: 768px){
+    .Trade_ready_step_4_container{
+        display: flex;
+        flex-direction: column;
+    }
 }

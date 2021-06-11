@@ -25,3 +25,14 @@
     font-size: 22px;
     justify-content: space-between;
 }
+
+@media (min-width: 768px) {
+.makeStyles-container {
+background-color: green;
+width: 768px;
+}
+}
+.makeStyles-container-14 {
+    border: 0px solid #E5E5E5 !important;
+    border-radius: 10px !important;
+}

@@ -13,6 +13,11 @@ import { apiCall, setAccessToken } from "../../Utils/Network";
 import {
   successToast,
 } from "../../../src/Components/Toast/index";
+import MobileVerification from "../../Pages/MobileVerification/index";
+
+import Dialog from '@material-ui/core/Dialog';
+
+
 
 const useStyles = makeStyles((theme) => ({
   FormControl: {
@@ -39,19 +44,32 @@ let AadharLinked = ({ details }) => {
   const [aadharnumber, setAadharNumber] = React.useState("");
   const [aadharlinked, setAadharLinked] = React.useState("");
   const [aadharverificationstatus,setAadharverificationstatus]=React.useState(false)
+  const [open, setOpen] = React.useState(false);
+  const [type,setType] = React.useState(null);
+  const [disabled,setDisabled] = React.useState(false)
+
 
   React.useEffect(() => {
     setAadharNumber(details.aadharNumber);
     setAadharLinked(details.aadharNumberVerified);
     setAadharverificationstatus(details.aadharNumberVerified)
+    
   }, [details]);
+  
+  React.useEffect( ()=>{
+    if (aadharlinked === "no" ){
+    setDisabled(true)
+    
+    }else if(aadharlinked === "yes"){
+      setDisabled(false)
+    }
+    },[aadharlinked,aadharnumber])
 
   const handleDone = async (event) => {
     event.preventDefault();
 
     let requestBody = {
 
-      productId: 1,
       aadharNumber: aadharnumber,
     };
     console.log("request body", requestBody);
@@ -71,60 +89,49 @@ let AadharLinked = ({ details }) => {
 
     console.log("responseJson", responseJSON);
     successToast("Success", "Aadhar Updated Successfully");
+    setOpen(true)
   };
 
   return (
     <div className="Trade_ready_step_6_container trade_ready_step_6_text">
       <div>
-        <h3>Aadhar Linked?</h3><h3>Verification Status: {aadharverificationstatus === true ? "Verified":"Pending"}</h3>
-        <form>
+        <h3>Aadhar Linked?</h3><h5>Verification Status: {aadharverificationstatus === true ? "Verified":"Pending"}</h5>
+        <div style={{display:"flex",flexDirection:"column",lineHeight:"40px"}}>
           <label className="Trade_ready_step_2_Label">
             Enter Your Aadhar Number
           </label>
           <input
+          style={{border: "1px solid #CFCBCF"}}
             type="text"
             name="aadharnumber"
             onChange={(e) => setAadharNumber(e.target.value)}
             value={aadharnumber}
+            maxLength="12"
           />
-          <label>Is your Aadhar card linked to Phone or not?</label>
-          <FormControl component="fieldset">
-            {/* <FormLabel classes={{root:classes.label}} className="who_are_you"required component="legend">Get Your Notification Via</FormLabel> */}
-            <RadioGroup
-              className="trade_ready_step_6_Choose_radio_group"
-              aria-label="position"
-              name="position"
-              onChange={(e) => {
-                setAadharLinked(e.target.value === "yes" ? true : false);
-              }}
-            >
-              <FormControlLabel
-                className="Trade_ready_step_6_Choose_radio_border"
-                value="yes"
-                control={<Radio color="#721B65" />}
-                label="Yes"
-                labelPlacement="start"
-                classes={{ root: classes.FormControl }}
-                checked={aadharlinked}
-              />
-              <FormControlLabel
-                className="Trade_ready_step_6_Choose_radio_border"
-                value="no"
-                control={<Radio color="#721B65" />}
-                label="No"
-                labelPlacement="start"
-                classes={{ root: classes.FormControl }}
-                checked={!aadharlinked}
-              />
-            </RadioGroup>
-          </FormControl>
-        </form>
+          
+          <label>Aadharcard Linked to mobile Number?</label>
+          
+          <div className="Trade_ready_step_6_radio-btn-group">
+          <div className="Trade_ready_step_6_radio-btn">
+            <label for="yes">Yes</label>
+            <input type="radio" className="radiosize" id="aadharlinked" name="aadharlinked" value="yes" checked={aadharlinked === "yes" ? true : false} onChange={(e) => {setAadharLinked("yes")}}/>
+          </div>
+
+            <div className="Trade_ready_step_6_radio-btn">
+            <label for="no">No</label>
+            <input type="radio" className="radiosize" id="aadharlinked" name="aadharlinked" value="no" checked={aadharlinked === "no" ? true : false} onChange={(e) => setAadharLinked("no")}/>
+          </div>
+        </div>
+        {aadharlinked === "no"? <p className="info">Please Link aadhar with mobile number, it is manditory for Buy and Sell</p>:null}
+
+        </div>
+        
         <div
           style={{
             display: "flex",
-            width: "432px",
+            // width: "432px",
             marginTop: "20px",
-            paddingTop: "15px",
+            padding: "10px",
             justifyContent: "center",
             height: "94px",
             background: "#2E384D",
@@ -143,7 +150,7 @@ let AadharLinked = ({ details }) => {
                 fontStyle: "normal",
               }}
             >
-              <b>Note:</b>Your agreement will be signed using aadhar based OTP
+              <b>Note:</b> Your agreement will be signed using aadhar based OTP
               verification. Please Keep your mobile phone ready, which is linked
               to your aadhar card.{" "}
             </p>
@@ -152,8 +159,15 @@ let AadharLinked = ({ details }) => {
 
         <div className="Trade_ready_step_6_save_button">
           <Buttons.SecondaryButton value="Previous" />
-          <Buttons.PrimaryButton value="Done" onClick={handleDone} />
+          <Buttons.PrimaryButton value="Done" onClick={handleDone} disabled={disabled}/>
         </div>
+        <Dialog
+        style={{height:"100vh"}}   
+        open={open}
+        onClose={() => { setOpen(false) }}
+        >
+                <MobileVerification type={type} />
+      </Dialog>
       </div>
 
       <div className="Trade_ready_step_6_bank_image_container">
@@ -171,6 +185,7 @@ let AadharLinked = ({ details }) => {
             shortlisted companies.
           </p>
         </div>
+        
       </div>
     </div>
   );

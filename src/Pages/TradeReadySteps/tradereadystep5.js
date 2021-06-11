@@ -55,31 +55,8 @@ let PANVerification = ({ details }) => {
 
     let requestBody = {
 
-      productId: 1,
-      username: null,
-      userType: null,
-      accountId: null,
-      profilePic: null,
-      uaVerifiedStatus: null,
-      bussinessName: null,
-      mobileNumber: null,
-      residentStatus: null,
-      email: null,
-      dob: "2021-04-09",
-      spouseFatherName: "aaaa",
-      notificationsChoice: "aaaaaaa",
-      panNumber: pannumber,
-      aadharNumber: null,
-      isAadharLinkedPhone: null,
-      emailVerified: false,
-      mobileVerified: false,
-      bankVerified: false,
-      residentStatusVerified: false,
-      panNumberVerified: false,
-      aadharNumberVerified: false,
-      addressVerified: false,
-      businessNameVerified: false,
-      userAccountActive: false,
+
+      panNumber: pannumber
     };
     console.log("request body", requestBody);
 
@@ -102,11 +79,11 @@ let PANVerification = ({ details }) => {
   };
 
   return (
-    <div className="Trade_ready_step_2_container trade_ready_step_2_text">
+    <div className="Trade_ready_step_5_container trade_ready_step_5_text">
       <div>
-        <h3>PAN KYC Verification.</h3><h3>Verification Status: {panverificationstatus === true ? "Verified":"Pending"}</h3>
+        <h3>PAN KYC Verification.</h3><h5>Verification Status: {panverificationstatus === true ? "Verified":"Pending"}</h5>
         <form>
-          <label className="Trade_ready_step_2_Label">Pan Number*</label>
+          <label className="Trade_ready_step_5_Label">Pan Number*</label>
           <input
             type="text"
             name="pannumber"
@@ -115,7 +92,7 @@ let PANVerification = ({ details }) => {
           />
         </form>
 
-        <div className="Trade_ready_step_2_save_button">
+        <div className="Trade_ready_step_5_save_button">
           <Buttons.SecondaryButton value="Previous" />
           <Buttons.PrimaryButton
             value="Save & Continue"
@@ -124,11 +101,11 @@ let PANVerification = ({ details }) => {
         </div>
       </div>
 
-      <div className="Trade_ready_step_2_bank_image_container">
-        <div className="Trade_ready_step_2_bank_image_area">
+      <div className="Trade_ready_step_5_bank_image_container">
+        <div className="Trade_ready_step_5_bank_image_area">
           <img src={pan} />
         </div>
-        <div className="Trade_ready_step_2_text">
+        <div className="Trade_ready_step_5_text">
           <p>
             <b>Why PAN Number?</b>
           </p>

@@ -1,4 +1,4 @@
-.Trade_ready_step_2_text{
+.Trade_ready_step_5_text{
     font-family: Montserrat;
     font-style: normal;
     color: #2E384D;
@@ -10,21 +10,21 @@ font-weight: 500;
 font-size: 14px;
 color: #2E384D;
 } */
-.Trade_ready_step_2_container{
+.Trade_ready_step_5_container{
     display: flex;
     margin: 10px;
     justify-content: space-between;
 }
-.Trade_ready_step_2_who_are_you{
+.Trade_ready_step_5_who_are_you{
     font-weight: 600;
 }
-.Trade_ready_step_2_Choose_radio_group{
+.Trade_ready_step_5_Choose_radio_group{
     /* margin-top: 12px; */
     font-weight: 500;
     font-size: 14px;
     color: #2E384D;
 }
-.Trade_ready_step_2_Choose_radio_border{
+.Trade_ready_step_5_Choose_radio_border{
     width: 596px;
     height: 40px;
     border: 1px solid #CFCBCF;
@@ -33,24 +33,23 @@ color: #2E384D;
 
 }
 
-.Trade_ready_step_2_bank_image_area{
+.Trade_ready_step_5_bank_image_area{
     width: 187.23px;
-    height: 134px;
+    
     background: url(https://www.google.co.in/);
     border-radius: 10px;
     padding-bottom: 40px;
 }
-.Trade_ready_step_2_bank_image_container{
-    width: 610px;
-    height: 458px;
+.Trade_ready_step_5_bank_image_container{
+    margin:20px ;
     border: 1px solid #CFCBCF;
-    box-sizing: border-box;
+    height: fit-content;
     filter: drop-shadow(0px 5px 50px #E5E9F3);
     border-radius: 22px;
-    padding: 80px;
+    padding: 20px;
 
 }
-.Trade_ready_step_2_save_button{
+.Trade_ready_step_5_save_button{
     display: flex;
     /* width: 150px; */
     margin-top: 30px;
@@ -58,7 +57,7 @@ color: #2E384D;
     border-top: 1px solid #CFCBCF;
     padding-top: 20px;
 }
-.Trade_ready_step_2_Select_container{
+.Trade_ready_step_5_Select_container{
     width: 362px;
     height: 40px;
     border: 1px solid #CFCBCF;
@@ -68,6 +67,12 @@ margin-top: 12px;
 margin-bottom:7px ;
 margin-left:-3px;
 }
-.Trade_ready_step_2_previous_button{
+.Trade_ready_step_5_previous_button{
     height: 60vh;
+}
+@media(max-width: 768px){
+    .Trade_ready_step_5_container{
+        display: flex;
+        flex-direction: column;
+    }
 }

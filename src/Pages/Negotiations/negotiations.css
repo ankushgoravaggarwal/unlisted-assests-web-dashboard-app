@@ -27,8 +27,6 @@
     border: solid 1px red;
 } */
 
-
-
 .negotiations .conversation {
     margin: 0px 100px;
     overflow: auto;
@@ -37,17 +35,12 @@
 .negotiation_buttons_container{
     display: flex;
     justify-content: flex-end;
-    
-}
 
+}
 .sellercard{
     display: flex;
     justify-content: flex-end;
     width: 100%;
-    padding: 0px 100px;
-}
-.buyercard {
-    padding: 0px 100px;
 }
 .offerAccepted{
     display: flex;
@@ -55,7 +48,6 @@
     width: 380px;
     background: #2E384D;
     border-radius: 10px;
-    
     height: 222px;
 }
 
@@ -134,8 +126,35 @@
 span.MuiTabs-indicator {
     background: #721c65 !important;
 }
+.seller-side-info {
+    text-align: right;
+    width: 50%;
+    float: right;
+}
+.conversation_inner {
+    padding: 0px 100px;
+}
+.seller-side-info h6 {
+    font-size: 13px;
+}
+.buyercard h6 b {
+    font-size: 13px;
+}
+h6.m-0.text-dark.mr-2 b {
+    font-size: 15px;
+}
 @media only screen and (max-width: 678px) {
     .mobi-none{
         display: none;
     }
-  }
+    .seller-side-info {
+        text-align: right;
+        float: right;
+    }
+    .conversation_inner {
+        padding: 0px 0px;
+    }
+    .seller-card p {
+        font-size: 13px;
+    }
+}

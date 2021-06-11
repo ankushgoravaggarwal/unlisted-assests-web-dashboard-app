@@ -1,3 +1,9 @@
+/* .container{
+    display: flex;
+    min-height: calc(100vh - 100px); 
+    align-items: center;
+    justify-content: space-evenly;
+} */
 
 .header{
     margin-bottom: 50px;
@@ -47,8 +53,8 @@ form input {
 }
 
 form label {
-    margin-top: 10px;
-    font-size: 13px;
+    margin-top: 25px;
+    font-size: 16px;
     line-height: 20px;
     color: #2E384D;
 }

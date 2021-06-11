@@ -181,5 +181,11 @@ a {
     margin-top: 20px;
 }
 
-
+.signup_phonenumber{
+    /* display:"flex",border: "1px solid #CFCBCF",alignItems:"center",height:"30px" */
+    display: flex;
+    border: 1px solid #CFCBCF;
+    align-items: center;
+    height: 30px;
+}
 

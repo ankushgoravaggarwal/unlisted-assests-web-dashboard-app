@@ -8,7 +8,7 @@ import {
     Switch,
     Route,
     Link,useHistory,useLocation
-  } from "react-router-dom";
+} from "react-router-dom";
 
 let SelectedAssest = (props) => {
     let location = useLocation();
@@ -26,7 +26,7 @@ let SelectedAssest = (props) => {
                         <div className="pl-3">
                             <h6 className="m-0"><b>{selectedTradeOngoingTxn.companyName}</b></h6>
                             <p className="text-small m-0">     {selectedTradeOngoingTxn.commodityName}<br />
-                                    LIST{selectedTradeOngoingTxn.tradeId}</p>  
+                                LIST{selectedTradeOngoingTxn.tradeId}</p>
                         </div>
                         <div className="dots-link desktop-none">
                             <img src={dots}/>
@@ -70,7 +70,7 @@ let SelectedAssest = (props) => {
                 <img src={more}/>
             </div>
         </div>
-        
+
     )
 }
 

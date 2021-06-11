@@ -1,5 +1,5 @@
 import React from "react";
-import "./buttons.css"
+import "./buttons.scoped.css"
 
 let SecondaryButton = (props) => {
     console.log("props", props)
@@ -11,7 +11,7 @@ let SecondaryButton = (props) => {
 let PrimaryButton = (props) => {
     console.log("props", props)
         return (
-            <button className="primary-button" {...props}>{props.value}</button>
+            <button className={`${props.disabled ? 'primary_disabled' : ''} primary-button`} {...props}>{props.value}</button>
         )
     
 }

@@ -10,7 +10,7 @@ import TableSortLabel from '@material-ui/core/TableSortLabel';
 import MyHoldingsTableHeader from './myholdingstableheader';
 import { makeStyles,withStyles } from '@material-ui/core/styles';
 import SunPharma from "./sun_pharma.svg";
-import "./myholdingstablecontent.css"
+import "./myholdingstablecontent.scoped.css"
 import Buttons from "../../Components/Buttons"
 import axios from 'axios'
 import ToogleButton from '../../Components/ToogleButton/toogleswitch';
@@ -28,7 +28,7 @@ import EmptyHoldings from "../Holdings/index"
 import edit from "./edit.svg";
 import deleteicon from "./delete.svg"
 import "../../Components/FilterCard/filterCard.css"
-import '../Companies/bootstrap4/css/bootstrap.scoped.css';
+import "../Companies/bootstrap4/css/bootstrap.scoped.css"
 import { faHome } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "../Companies/style.scoped.css"
@@ -181,16 +181,7 @@ export default function MyHoldingsTableContent(props){
         
     }
 
-    // [
-    //     {"company":,"qty":36,"sharetype":"John","price":15,"amount":100,"date":"9 Oct 2020","verified": "Yes","availableforsell": "Yes","action":"Edit"},
-    //     {"company":"Moon Pharma","qty":23,"sharetype":"Rose","price":25,"amount":200,"date":"28 Oct 2020","verified": "Yes","availableforsell": "Yes","action":"Delete"},
-    //     {"company":"Venus Pharma","qty":30,"sharetype":"Daniel","price":5,"amount":10,"date":"9 nov 2020","verified": "No","availableforsell": "Yes","action":"Edit"},
-    //     {"company":"Earth Pharma","qty":34,"sharetype":"Aari","price":65,"amount":160,"date":"9 Oct 2021","verified": "Yes","availableforsell": "Yes","action":"Edit"},
-    //     {"company":"jupiter Pharma","qty":37,"sharetype":"Rio","price":16,"amount":180,"date":"11 Oct 2020","verified": "No","availableforsell": "Yes","action":"Edit"},
-    //     {"company":"Mercury Pharma","qty":28,"sharetype":"Rafiq","price":24,"amount":250,"date":"28 Oct 2020","verified": "Yes","availableforsell": "Yes","action":"Delete"},
-    //     {"company":"Saturn Pharma","qty":38,"sharetype":"Dinesh","price":51,"amount":105,"date":"20 nov 2020","verified": "No","availableforsell": "Yes","action":"Edit"},
-    //     {"company":"Pluto Pharma","qty":39,"sharetype":"Aajith","price":67,"amount":180,"date":"23 Oct 2021","verified": "Yes","availableforsell": "Yes","action":"Delete"},
-    // ]
+    
     const [addHoldings,setAddHoldings]=React.useState(false); 
     const [open, setOpen] = React.useState(false);
     const [remove, setRemove] = React.useState(null)
@@ -346,7 +337,7 @@ export default function MyHoldingsTableContent(props){
     }
       
     return(
-            <div className="container-fluid">
+            <div className="container-fluid" style={{marginTop:"25px"}}>
             <div className="my-holdings-page row">
                 {rowInformation.length === 0 ? <EmptyHoldings/> : 
                  <React.Fragment>
@@ -356,20 +347,17 @@ export default function MyHoldingsTableContent(props){
                  <div className="col-md-9 col-12">
                  <div className="table-container">
  
-                 <div className="Table_title"> <h6 className="mt-2"><strong> My Holdings </strong></h6> 
-                 {/* <button className="view_all_button">View all</button> */}
-                
-                 {/* <button onClick={()=>setAddHoldings(true)}>Add Holdings</button> */}
-                 {/* <Buttons.SecondaryButton value="Add Holdings" onClick={()=>setAddHoldings(true)}/> */}
-                 <Buttons.SecondaryButton value="Add Holdings" id="add-holdings-button" onClick={()=>{history.push("/addholdings")}}/>
-
-                {/* {addHoldings} */}
+                 <div className="Table_title" > <h6 style={{marginTop:"20px"}}><strong> My Holdings </strong></h6> 
+                 
+                 <Buttons.SecondaryButton value="Add Holdings" id="add-holdings-button" onClick={()=>{history.push("/addholdings")}}
+                 style={{height: "34px",background: "transparent",border: "1px solid #721B65"}}
+                 />
                  </div> 
                  { addHoldings ? null :
             <div className="mt-3 myholding-right-sec">
             <TableContainer className={classes.container}>
             
-             <Table stickyHeader>
+             <Table stickyHeader >
                  <MyHoldingsTableHeader
                  valueToOrderBy={valueToOrderBy}
                  orderDirection={orderDirection}
@@ -379,14 +367,14 @@ export default function MyHoldingsTableContent(props){
                      sortedRowInformation(rowInformation,getComparator(orderDirection,valueToOrderBy))
                      .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                      .map((holding,index) => (
-                         <TableRow key={index}>
+                         <TableRow key={index} style={{backgroundColor:"white"}}>
                              <TableCell>
                              <div className="company_cell1 d-flex align-items-center justify-content-center">
                                  <div className="company-logo-img"><img src={holding.companyLogo} className="product-company-logo"/> </div>
                                  <div className="company_details1 ml-2">
-                                 <p className="company_name m-0">{holding.companyName}</p>
+                                 <p className="company_name m-0"><b>{holding.companyName}</b></p>
                                  <p className="Share_type m-0">{holding.commodityName}</p>
-                                 <p className="myHoldings_id m-0">HOLD{holding.companyId}</p>
+                                 <p className="myHoldings_id m-0">HOLD{holding.id}</p>
                                  </div>
                              </div>
                              </TableCell>
@@ -404,10 +392,10 @@ export default function MyHoldingsTableContent(props){
                              {holding.qtySale} of {holding.qtyTotal}
                              </p>
                              </TableCell>
-                             <TableCell>
+                             <TableCell >
                                  {holding.action}
                                  
-                                 <div style={{display:"flex"}}>
+                                 <div style={{display:"flex",alignItems:"center"}}>
                                  <img className="mr-2" src={edit} width="35" height="35" 
                                    onClick={()=>{
                                      console.log("selected holdings", holding)
@@ -420,11 +408,16 @@ export default function MyHoldingsTableContent(props){
                                  
                                 
                                  
-                                    {holding.tradeId != null?<Buttons.SecondaryButton value="Edit Listing" onClick={()=>{
+                                    {holding.tradeId != null?<Buttons.SecondaryButton value="Edit Listing" 
+                                        style={{height: "34px",background: "transparent",border: "1px solid #721B65"}}
+                                        onClick={()=>{
                                              history.push({ pathname: "/edit_inventory", state: { selectedHolding: holding } })
                                          }
-                                         } />
-                                    :<Buttons.SecondaryButton value="Add Listing"  onClick={()=>{
+                                         }
+                                         />
+                                    :<Buttons.SecondaryButton value="Add Listing"  
+                                    style={{height: "34px",background: "transparent",border: "1px solid #721B65"}}    
+                                    onClick={()=>{
                                              history.push({ pathname: "/create_inventory", state: { selectedHolding: holding } })
                                          }
                                          } />}

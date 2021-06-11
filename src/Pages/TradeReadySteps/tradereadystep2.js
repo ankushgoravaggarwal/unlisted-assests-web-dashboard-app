@@ -17,7 +17,7 @@ import UploadIcon from "../../assets/upload_icon.svg";
 import {
     successToast,
   } from "../../../src/Components/Toast/index";
-  import '../../Pages/Companies/bootstrap4/css/bootstrap.scoped.css';
+import '../../Pages/Companies/bootstrap4/css/bootstrap.scoped.css';
 
 const useStyles = makeStyles((theme)=>({
     FormControl:{
@@ -129,7 +129,7 @@ let AddBankAccount =()=>{
                     <Buttons.PrimaryButton value="Save & Continue" style={{margin:"10px"}} disabled={!(bankname && accountnumber && confirmaccountnumber && branchname && ifsc)} onClick={saveContinue} />
                 </div>
             </div>
-            <div className="col-md-6 col-12">
+            <div className="col-md-6 col-12 Trade_ready_step_2_bank_image_container" >
                 <div className="step1-right-sec mt-4">
                     <div className="">
                         <img src={bank} className="w-25"/>

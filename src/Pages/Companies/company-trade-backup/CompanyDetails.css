@@ -1,0 +1,105 @@
+.company-details.bg-white.p-2 {
+  border: 1px solid #d2ced3;
+  border-radius: 5px;
+  padding: 15px;
+}
+.c_logo img {
+border: 1px solid #d1ced3;
+padding: 15px;
+border-radius: 8px;
+margin: 8px 15px;
+}
+.c_name h4 {
+font-weight: 600;
+font-family: 'Montserrat';
+letter-spacing: 1px;
+font-size: 20px;
+}
+.c_name p {
+font-size: 14px;
+color: #7E7E7E;
+line-height: 1;
+margin: 7px 0px;
+}
+.c_name p span {
+margin-left: 11px;
+}
+.c_name p span a {
+color: #721c65 !important;
+}
+button.btn.btn-inctive {
+color: #FFBF00;
+border: 1px solid #FFBF00;
+font-weight: 600;
+font-size: 14px;
+letter-spacing: 1px;
+}
+.card {
+border: 1px solid rgb(206 203 207) !important;
+border-radius: 8px !important;
+padding: 15px !important;
+}
+.listing-table table th {
+font-size: 13px;
+text-align: left;
+padding: 8px 5px;
+font-weight: 500;
+color: #721c65;
+border-bottom: 1px solid #cdcbcf;
+}
+.listing-table table td {
+font-size: 12px;
+text-align: left;
+padding: 12px 1px;
+font-weight: 500;
+color: #2E384D;
+border-bottom: 1px solid #cdcbcf;
+}
+.listing-table table td span {
+font-size: 9px;
+margin-right: 8px;
+}
+.about-tab-section p {
+font-size: 14px;
+line-height: 1.5;
+color: #7E7E7E;
+font-family: 'Montserrat';
+
+}
+.Key-milestones h5 {
+color: #7E7E7E;
+font-weight: 600 !important;
+font-family: 'Montserrat';
+
+}
+.Key-milestones p {
+font-size: 12px;
+color: #7E7E7E;
+font-family: 'Montserrat';
+
+}
+.CorporateInformation-text p {
+font-size: 13px;
+color: #7E7E7E;
+font-weight: 600;
+font-family: 'Montserrat';
+
+}
+.CorporateInformation-text p span{
+font-size: 13px;
+color: #000;
+font-weight: 500 !important;
+}
+.CorporateInformation h6 {
+font-family: 'Montserrat';
+}
+.about-tab-section h5 {
+font-family: 'Montserrat';
+font-weight: 600 !important;
+font-size: 16px !important;
+}
+.available-listing {
+color: #2E384D;
+font-family: 'Montserrat';
+font-weight: 600 !important;
+}
